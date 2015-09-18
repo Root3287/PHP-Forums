@@ -1,0 +1,58 @@
+CREATE TABLE `cat` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`order` INT(11) NULL DEFAULT NULL,
+	`parent` INT(11) NULL DEFAULT NULL,
+	`news` INT(11) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=5
+;
+CREATE TABLE `groups` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`group_name` TEXT NOT NULL,
+	`permissions` TEXT NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3
+;
+CREATE TABLE `post` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`post_title` VARCHAR(50) NOT NULL,
+	`cat_id` INT(11) NOT NULL DEFAULT '1',
+	`post_cont` LONGTEXT NOT NULL,
+	`post_user` INT(11) NOT NULL,
+	`post_date` INT(11) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `users` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(50) NOT NULL,
+	`password` LONGTEXT NOT NULL,
+	`salt` LONGTEXT NOT NULL,
+	`name` VARCHAR(50) NOT NULL,
+	`group` INT(11) NOT NULL,
+	`joined` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2
+;
+CREATE TABLE `user_session` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL,
+	`hash` LONGTEXT NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
