@@ -9,8 +9,14 @@ class Forums{
 		$post = ($post !=null)? $this->_db->query("SELECT * FROM `post` WHERE `id`={$post} AND `cat_id`={$cat}")->results():$this->_db->get('post', array('cat_id', '=',$cat));
 		return $post;
 	}
-	public function listPost($group_id) {
-		
+	public function getPostAsList() {
+		return $this->getPost()->results();
+	}
+	public function listPost(){
+		foreach($this->getPostAsList() as $post){
+			echo $post->post_title;
+			echo $post->post_date;
+		}
 	}
 	public function listParentCat($group_id = null) {
 		$cats = $this->_db->query('SELECT * FROM cat WHERE parent IS NULL')->results();
@@ -46,8 +52,12 @@ class Forums{
 			}
 		}
 	}
+	public function getCat($id = null){
+		$where = ($id)? array('id', '=', $id): array('1','=','1');
+		return $this->_db->get('cat', $where);
+	}
 	public function createPost($fields = array()){
-		if($this->_db->insert('posts', $fields)){
+		if($this->_db->insert('post', $fields)){
 			throw new Exception('There was an error inserting the data to the database.');
 		}
 	}

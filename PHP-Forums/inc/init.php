@@ -1,5 +1,6 @@
 <?php
 $GLOBALS['config'] = array(
+	"config"=>array("name"=>"Forums"),
 	"mysql" => array(
 		"host" => '127.0.0.1',
 		"user" => 'root',

@@ -31,6 +31,7 @@ if(Input::exists()){
 ?>
 <html>
 	<head>
+	<?php include path.'assets/head.php';?>
 	</head>
 	<body>
 		<a href="../../index.php">Back</a>

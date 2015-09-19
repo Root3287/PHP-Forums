@@ -6,6 +6,7 @@ $forums = new Forums();
 ?>
 <html>
 	<head>
+		<?php include path.'assets/head.php';?>
 	</head>
 	<body>
 		<?php
@@ -22,9 +23,8 @@ $forums = new Forums();
 			}else{
 				echo 'You need to <a href="pages/login/index.php">login</a> or <a href="pages/register">sign up</a> to get the full features of this page';
 			}
+			
 		?>
-		
-		<h2>TEST CAT</h2>
 		<?php 
 		$forums->listCat(path);
 		?>
