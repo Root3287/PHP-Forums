@@ -57,6 +57,7 @@ if(Input::exists()){
 	<?php Include path.'assets/head.php';?>
 	</head>
 	<body>
+		<?php include path.'assets/nav.php';?>
 		<a href="../../index.php">Back</a>
 		<form action="" method="post">
 		<label for="name">

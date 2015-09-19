@@ -15,6 +15,7 @@ if(Input::exists('get')){
 <html>
 <head><?php include path.'assets/head.php';?></head>
 <body>
+<?php include path.'assets/nav.php';?>
 <?php if($parent !=null && $cat == null){$cat = $parent;}
 
 if($cat ==null && $parent ==null){

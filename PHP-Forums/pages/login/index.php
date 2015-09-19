@@ -34,6 +34,7 @@ if(Input::exists()){
 	<?php include path.'assets/head.php';?>
 	</head>
 	<body>
+		<?php include path.'assets/nav.php';?>
 		<a href="../../index.php">Back</a>
 		<form action="" method="post">
 			<label for="username">

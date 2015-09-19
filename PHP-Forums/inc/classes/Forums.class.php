@@ -46,7 +46,7 @@ class Forums{
 	}
 	public function listCat($path){
 		foreach ($this->listParentCat() as $parent){
-			echo "<h1><a href='{$path}pages/cat/?cat={$parent['id']}'>{$parent['name']}</h1>";
+			echo "<h1><a href='{$path}pages/cat/?cat={$parent['id']}'>{$parent['name']}</a></h1>";
 			foreach ($this->listChildCat($parent['id']) as $child){
 				echo "<a href='{$path}pages/cat/?cat={$child['id']}&parent={$parent['id']}'>{$child['name']}</a><br/>";
 			}

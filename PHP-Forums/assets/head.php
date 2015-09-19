@@ -4,3 +4,4 @@
 <meta name="description" content="Forums">
 <meta name="keywords" content="Forums">
 <meta charset="UTF-8">
+<link rel="stylesheet" href="<?php echo path.'assets/css/'.Setting::get('bootstrap-theme').'.css';?>">

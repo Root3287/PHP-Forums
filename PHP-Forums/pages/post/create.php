@@ -51,6 +51,7 @@ if(Input::exists() && Input::get('Submit')){
 	<?php Include path.'assets/head.php';?>
 	</head>
 	<body>
+		<?php include path.'assets/nav.php';?>
 		<?php if(Input::exists()){
 			if(Input::get('preview')){
 			echo BBcode::make(escape(Input::get('content')));

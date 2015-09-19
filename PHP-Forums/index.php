@@ -9,12 +9,13 @@ $forums = new Forums();
 		<?php include path.'assets/head.php';?>
 	</head>
 	<body>
+		<?php include path.'assets/nav.php';?>
 		<?php
 			if(Session::exists('complete')){
-				echo Session::flash('complete').'<br/>';
+				echo "<div class='alert alert-success'>".Session::flash('complete')."</div><br/>";
 			}
 			if(Session::exists('error')){
-				echo session::flash('error').'<br/>';
+				echo "<div class='alert alert-danger'>".Session::flash('error')."</div><br/>";
 			}
 			
 			if($user->isLoggedIn()){
@@ -28,5 +29,6 @@ $forums = new Forums();
 		<?php 
 		$forums->listCat(path);
 		?>
+		<?php include path.'assets/foot.php';?>
 	</body>
 </html>
