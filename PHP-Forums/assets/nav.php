@@ -14,8 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="<?php echo path.'pages/cat/';?>">Categories</a></li>
-        <li><a href="#">Post</a></li>
+        <li><a href="<?php echo path."pages/post"?>">Post</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Mail</a></li>

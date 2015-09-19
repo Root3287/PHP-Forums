@@ -5,7 +5,7 @@ $forums = new Forums();
 $user = new User();
 
 if(Input::exists('get')){
-	if(!$forums->getCat(escape(Input::get('c')))->count()){
+	if(!$forums->getCat(escape(Input::get('c')))){
 		die();//Redirect::to(path.'404.php') // TODO MAKE 404
 	}
 }else{
