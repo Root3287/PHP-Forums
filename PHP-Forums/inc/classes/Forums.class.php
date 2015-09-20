@@ -15,11 +15,26 @@ class Forums{
 		}
 		return $post_return;
 	}
+	public function getPost2($post){
+		return $this->_db->get('post', array('id','=',$post))->results();
+	}
 	public function listPost($c, $path=null){
 		if($c){
 			echo "<table class='table table-striped table-hover'><thead><tr><th>ID #</th><th>Name</th><th>User</th></tr></thead><tbody>";
 			foreach($this->getPost($c) as $post){
-				echo "<tr><td>{$post->id}</td><td>{$post->post_title}</td><td>{$post->post_user}</td></tr>";
+				echo "<tr>
+				<td>
+				<a href='{$path}pages/post/view.php?c={$c}&p={$post->id}'>
+				{$post->id}
+				</a>
+				</td>
+				<td>
+				<a href='{$path}pages/post/view.php?c={$c}&p={$post->id}'>
+				{$post->post_title}
+				</a>
+				</td>
+				<td>{$post->post_user}</td>
+				</tr>";
 			}
 			echo "</tbody></table>";
 		}else{
@@ -58,7 +73,7 @@ class Forums{
 			foreach ($this->listParentCat() as $parent){
 				echo "<b>{$parent['name']}</b><br>";
 				foreach ($this->listChildCat($parent['id']) as $child){
-					echo "<a href='?cat={$child['id']}'>{$child['name']}</a><br/>";
+					echo "<a href='{$path}pages/post/?cat={$child['id']}'>{$child['name']}</a><br/>";
 				}
 			}
 			echo '</div>';
@@ -72,12 +87,26 @@ class Forums{
 			}
 		}
 	}
+	public function getReply($post = null){
+		$where = ($post)? "`post_id` = {$post}": "1 = 1";
+		return $this->_db->query("SELECT * FROM `reply` WHERE {$where} ORDER BY id ASC;")->results();
+	}
+	public function getReplyLimit($limit, $offset = '0', $post = null){
+		$return = ($post)? $this->_db->query("SELECT * FROM `reply` WHERE `post_id` = {$post} LIMIT {$limit} OFFSET {$offset}")
+		: $this->_db->query("SELECT * FROM `reply` LIMIT {$limit} OFFSET {$offset} ORDER BY id DESC;");
+		return $return;
+	}
 	public function getCat($id = null){
 		$where = ($id)? array('id', '=', $id): array('1','=','1');
 		return $this->_db->get('cat', $where)->results();
 	}
 	public function createPost($fields = array()){
-		if($this->_db->insert('post', $fields)){
+		if(!$this->_db->insert('post', $fields)){
+			throw new Exception('There was an error inserting the data to the database.');
+		}
+	}
+	public function createReply($fields = array()){
+		if(!$this->_db->insert('reply', $fields)){
 			throw new Exception('There was an error inserting the data to the database.');
 		}
 	}

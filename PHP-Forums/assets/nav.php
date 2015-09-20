@@ -17,9 +17,9 @@
         <li><a href="<?php echo path."pages/post"?>">Post</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Mail</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+        <!-- Make mail -->
+        <!-- <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-inbox"><span class="badge">999</span></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
@@ -27,6 +27,23 @@
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>
+        </li>-->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php if($user->isLoggedIn()){echo $user->data()->username;}else{echo 'Guest';}?> <span class="caret"></span></a>
+          <?php if(!$user->isLoggedIn()){?>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo path.'pages/login'?>">Login</a></li>
+            <li><a href="<?php echo path.'pages/register'?>">Register</a></li>
+          </ul>
+          <?php }else{?>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="<?php echo path.'pages/logout'?>">Logout</a></li>
+          </ul>
+          <?php }?>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

@@ -17,32 +17,40 @@ if(!$user->isLoggedIn()){
 	Redirect::to(path.'index.php');
 }
 
-if(Input::exists() && Input::get('Submit')){
-	if(Token::check(Input::get('token'))){
-		$val = new Validation();
-		$validate = $val->check($_POST, array(
-			'title' => array(
-					'required' => true,
-			),
-			'content' => array(
-					'required' => true,
-			)
-		));
-		if($validate->passed()){
-			try{
-				$forums->createPost(array(
-					'post_title' => escape(Input::get('title')),
-					'cat_id' => escape(Input::get('c')),
-					'post_cont' => escape(Input::get('content')),
-					'post_date' => date('Y-m-d- H:i:s'),
-					'post_user' => $user->getGroupId(),
-				));
-			}catch (Exception $e){
-				die($e->getMessage());
+if(Input::exists()){
+	if(Input::get('Submit')){
+		if(Token::check(Input::get('token'))){
+			$val = new Validation();
+			$validate = $val->check($_POST, array(
+				'title' => array(
+						'required' => true,
+				),
+				'content' => array(
+						'required' => true,
+				),
+			));
+			if($validate->passed()){
+				try{
+					$forums->createPost(array(
+						'post_title' => escape(Input::get('title')),
+						'cat_id' => escape(Input::get('c')),
+						'post_cont' => escape(Input::get('content')),
+						'post_date' => date('Y-m-d- H:i:s'),
+						'post_user' => $user->data()->id,
+					));
+					session::flash('complete', 'You posted your post!');
+					Redirect::to(path);
+				}catch (Exception $e){
+					die($e->getMessage());
+				}
+			}else{
+				echo 'val not passed';
 			}
 		}else{
-			echo 'val not passed';
+			die('token failed');
 		}
+	}else{
+		die('submit');
 	}
 }
 ?>
@@ -52,21 +60,37 @@ if(Input::exists() && Input::get('Submit')){
 	</head>
 	<body>
 		<?php include path.'assets/nav.php';?>
-		<?php if(Input::exists()){
-			if(Input::get('preview')){
-			echo BBcode::make(escape(Input::get('content')));
-		}}?>
-		<form action="" method="post">
-			<input type="text" name="title"><br>
-			<input type="button" onclick="formatText('b')" value="Bold">
-			<input type="button" onclick="formatText('i')" value="Italic">
-			<input type="button" onclick="formatText('u')" value="Underline">
-			<input type="button" onclick="formatText('br')" value="Break">
-			<input type="button" onclick="formatText('img')" value="Image">
-			<input type="button" onclick="formatText('link')" value="link"><br/>
-			<textarea name="content" id="content" rows="21" cols="50"></textarea><br/>
-			<input type="hidden" name="token" value="<?php echo Token::generate()?>"><input name="submit" type="submit" value="Submit"><input name="preview" type="submit" value="Preview">
-		</form>
+		<div class="col-md-9">
+			<h1>New Post</h1>
+			<form action="" method="post">
+				<div class="form-group">
+					<input name="title" type="text" placeholder="Title" class="form-control input-lg">
+				</div>
+				<div class="row">
+					<div class="col-xs-offset-3">
+					<div class="form-group">
+						<input type="button" onclick="formatText('b')" class="btn btn-md btn-default" value="Bold">
+						<input type="button" onclick="formatText('i')" class="btn btn-md btn-default" value="Italic">
+						<input type="button" onclick="formatText('u')" class="btn btn-md btn-default" value="Underline">
+						<input type="button" onclick="formatText('br')" class="btn btn-md btn-default" value="Break">
+						<input type="button" onclick="formatText('img')" class="btn btn-md btn-default" value="Image">
+						<input type="button" onclick="formatText('link')" class="btn btn-md btn-default" value="link"><br/>
+					</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<textarea placeholder="Content" name="content" id="content" rows="21" cols="50" class="form-control"></textarea>
+				</div>
+				<div class="form-group">
+					<input type="hidden" name="token" value="<?php echo Token::generate()?>">
+					<input class="btn btn-lg btn-block btn-primary" name="Submit" type="submit" value="Submit">
+				</div>
+			</form>
+		</div>
+		<div class="col-md-3">
+			<h1>Other Categories</h1>
+			<?php $forums->listCat(true, path)?>
+		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script type="text/javascript">
 		function formatText(tag) {

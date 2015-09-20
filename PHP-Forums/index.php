@@ -20,8 +20,7 @@ $forums = new Forums();
 				}
 				
 				if($user->isLoggedIn()){
-					echo 'Welcome back '.$user->data()->username.' <a href="pages/logout/index.php">logout</a>';
-					echo '<br/> Post new topic';
+					
 				}else{
 					echo '<div class="alert alert-info">You need to <a class="alert-link" href="pages/login/index.php">login</a> or <a class="alert-link" href="pages/register">sign up</a> to get the full features of this page</div>';
 				}

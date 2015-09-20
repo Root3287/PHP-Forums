@@ -1,6 +1,7 @@
 <?php
 define('path', '../../');
 require path.'inc/init.php';
+$user = new User();
 if(Input::exists()){
 	if(Token::check(Input::get('token'))){
 		$val = new Validation();
@@ -58,22 +59,43 @@ if(Input::exists()){
 	</head>
 	<body>
 		<?php include path.'assets/nav.php';?>
-		<a href="../../index.php">Back</a>
-		<form action="" method="post">
-		<label for="name">
-				Name: <input type="text" name="name" id="name" value="<?php echo escape(Input::get('name'));?>"/><br/>
-			</label>
-			<label for="username">
-				Username: <input type="text" name="username" id="username" value="<?php echo escape(Input::get('username'));?>"/><br/>
-			</label>
-			<label for="password">
-				Password: <input type="password" name="password" id="password" value="<?php echo escape(Input::get('password'));?>"/><br/>
-			</label>
-			<label for="password_conf">
-				Password: <input type="password" name="password_conf" id="password_conf"/><br/>
-			</label>
-			<input type="hidden" name="token" value="<?php echo Token::generate();?>"/>
-			<input type="submit" value="Submit"/>
-		</form>
+		<div class="container">
+			<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+				<h1>Register</h1>
+				<form action="" method="post">
+					<div class="form-group">
+						<input name="name" value="<?php echo Input::get('name');?>" placeholder="Name" type="text" class="form-control input-lg">
+					</div>
+					<div class="form-group">
+						<input name="username" value="<?php echo Input::get('username');?>" placeholder="username" type="text" class="form-control input-lg">
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<div class="form-group">
+								<input name="password" value="<?php echo Input::get('password');?>" placeholder="Password" type="password" class="form-control input-lg">
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<div class="form-group">
+								<input name="password_conf" placeholder="Confirm Password" type="password" class="form-control input-lg">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<div class="form-group">
+								<a href="../../pages/login" class="btn btn-lg btn-block btn-danger">Login</a>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<div class="form-group">
+								<input type="submit" class="btn btn-lg btn-block btn-primary" value="Register">
+								<input type="hidden" name="token" value="<?php echo Token::generate();?>"/>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>

@@ -31,7 +31,7 @@ $user = new User();
 				<?php if($user->isLoggedIn() && Input::exists('get') && Input::get('cat')){?>
 				<a class="btn btn-default" href="create.php?c=<?php echo Input::get('cat')?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> New Post</a>
 				<?php }?>
-				<?php $forums->listCat(true);?>
+				<?php $forums->listCat(true, path);?>
 			</div>
 		</div>
 		<?php include path.'assets/foot.php'?>
