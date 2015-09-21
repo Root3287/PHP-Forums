@@ -28,9 +28,10 @@ $user = new User();
 				}?>
 			</div>
 			<div class="col-md-3">
-				<?php if($user->isLoggedIn() && Input::exists('get') && Input::get('cat')){?>
-				<a class="btn btn-default" href="create.php?c=<?php echo Input::get('cat')?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> New Post</a>
+				<?php if($user->isLoggedIn() && Input::exists('get') && Input::get('cat')){?><br/>
+				<a class="btn btn-default" href="create.php?c=<?php echo Input::get('cat')?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> New Post</a><br/>
 				<?php }?>
+				<h1>Other Categories</h1>
 				<?php $forums->listCat(true, path);?>
 			</div>
 		</div>

@@ -22,6 +22,8 @@ class Forums{
 		if($c){
 			echo "<table class='table table-striped table-hover'><thead><tr><th>ID #</th><th>Name</th><th>User</th></tr></thead><tbody>";
 			foreach($this->getPost($c) as $post){
+				$author = new User($post->post_user);
+				$author = $author->data();
 				echo "<tr>
 				<td>
 				<a href='{$path}pages/post/view.php?c={$c}&p={$post->id}'>
@@ -33,7 +35,7 @@ class Forums{
 				{$post->post_title}
 				</a>
 				</td>
-				<td>{$post->post_user}</td>
+				<td>{$author->username}</td>
 				</tr>";
 			}
 			echo "</tbody></table>";

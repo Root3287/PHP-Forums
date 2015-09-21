@@ -37,9 +37,9 @@
           </ul>
           <?php }else{?>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="<?php echo path.'pages/user'?>">UserCP</a></li>
+            <?php if($user->hasPermission("Mod")){?><li><a href="<?php echo path;?>pages/user/mod">ModCP</a></li><?php }?>
+            <?php if($user->hasPermission("Admin")){?><li><a href="<?php echo path.'pages/user/admin'?>">AdminCP</a></li><?php }?>
             <li role="separator" class="divider"></li>
             <li><a href="<?php echo path.'pages/logout'?>">Logout</a></li>
           </ul>

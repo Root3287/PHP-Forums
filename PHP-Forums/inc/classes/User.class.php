@@ -97,6 +97,9 @@ class User{
 	public function isLoggedIn(){
 		return $this->_isLogin;
 	}
+	public function getAvatarURL($size = '32'){
+		return "https://gravatar.com/avatar/".md5($this->data()->email)."?d=mm&s={$size}&r=pg";
+	}
 	public function logout() {
 		$this->_db->delete('user_session', array('user_id', '=', $this->data()->id));
 		Session::delete($this->_sessionName);

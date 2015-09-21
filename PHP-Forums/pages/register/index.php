@@ -15,6 +15,10 @@ if(Input::exists()){
 					'max' => 50,
 					'unique' => 'users'
 				),
+				'email'=> array(
+					'required'=> true,
+					'unique' => 'users',
+				),
 				'password' => array(
 					'required' => true,
 					'min' => 8
@@ -43,6 +47,7 @@ if(Input::exists()){
 						'name'=> escape(Input::get('name')),
 						'joined'=> date('Y-m-d- H:i:s'),
 						'group'=> 1,
+						'email'=> escape(Input::get('email')),
 				));
 			}catch (Exception $e){
 				die($e->getMessage());
@@ -68,6 +73,9 @@ if(Input::exists()){
 					</div>
 					<div class="form-group">
 						<input name="username" value="<?php echo Input::get('username');?>" placeholder="username" type="text" class="form-control input-lg">
+					</div>
+					<div class="form-group">
+						<input name="email" value="<?php echo Input::get('email');?>" placeholder="email" type="email" class="form-control input-lg">
 					</div>
 					<div class="row">
 						<div class="col-xs-12 col-md-6">

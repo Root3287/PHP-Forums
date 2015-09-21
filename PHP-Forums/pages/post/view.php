@@ -27,19 +27,19 @@ $author = new User($post->post_user);
 				<?php if($user->isLoggedIn()){?><a class="btn btn-xs btn-default" href="reply.php?c=<?php echo Input::get('c')?>&p=<?php echo Input::get('p');?>">Reply</a><?php }?>
 				</div>
 				<div class="panel-body">
-				<div class="col-md-3"><?php echo $author->data()->username;?></div>
+				<div class="col-md-3"><?php echo "<img src='".$author->getAvatarURL(64)."'  class='img-circle'><br/>".$author->data()->username;?></div>
 				<div class="col-md-6"><?php echo BBCode::make($post->post_cont);?></div>
 				</div>
 			</div>
 			<!-- REPLY -->
-			<?php foreach ($forums->getReply(escape(Input::get('p'))) as $reply){ $author_reply = new User($reply->user_id); $author_reply=$author_reply->data();?>
+			<?php foreach ($forums->getReply(escape(Input::get('p'))) as $reply){ $author_reply = new User($reply->user_id);?>
 				<div class="panel panel-info">
 					<div class="panel-heading">
 					<?php echo $reply->title?>
 					<?php if($user->isLoggedIn()){?><a class="btn btn-xs btn-default" href="reply.php?c=<?php echo Input::get('c')?>&p=<?php echo Input::get('p');?>">Reply</a><?php }?>
 					</div>
 					<div class="panel-body">
-						<div class="col-md-3"><?php echo $author_reply->username;?></div>
+						<div class="col-md-3"><?php echo "<img src='{$author_reply->getAvatarURL(64)}' class='img-circle'><br/>".$author_reply->data()->username;?></div>
 						<div class="col-md-9"><?php echo BBCode::make($reply->content);?></div>
 					</div>
 				</div>
