@@ -70,7 +70,7 @@ class DBHelper{
   }
 }
 
-$start = new dbStarter();
+$start = new dbHelper();
 
 if(!$start->startTables()->hasError()){
 	foreach($start->getMessage() as $message){
