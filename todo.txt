@@ -5,3 +5,9 @@ Create AdminCP
 Create ModCP
 Build the full permission system
 Finish validation
+Add User Custom Themes
+Add Notifaction.
+Give id or unique id.
+Achivements?
+Address Info?
+Avatar upload...
