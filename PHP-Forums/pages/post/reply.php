@@ -34,7 +34,7 @@ if(Input::exists()){
 					$forums->createReply(array(
 						'title' => escape(Input::get('title')),
 						'post_id' => escape(Input::get('p')),
-						'content' => escape(Input::get('content')),
+						'content' => Input::get('content'),
 						'date' => date('Y-m-d- H:i:s'),
 						'user_id' => $user->data()->id,
 					));
@@ -66,18 +66,6 @@ if(Input::exists()){
 				<div class="form-group">
 					<input name="title" type="text" placeholder="Title" class="form-control input-lg">
 				</div>
-				<div class="row">
-					<div class="col-xs-offset-3">
-					<div class="form-group">
-						<input type="button" onclick="formatText('b')" class="btn btn-md btn-default" value="Bold">
-						<input type="button" onclick="formatText('i')" class="btn btn-md btn-default" value="Italic">
-						<input type="button" onclick="formatText('u')" class="btn btn-md btn-default" value="Underline">
-						<input type="button" onclick="formatText('br')" class="btn btn-md btn-default" value="Break">
-						<input type="button" onclick="formatText('img')" class="btn btn-md btn-default" value="Image">
-						<input type="button" onclick="formatText('link')" class="btn btn-md btn-default" value="link"><br/>
-					</div>
-					</div>
-				</div>
 				<div class="form-group">
 					<textarea placeholder="Content" name="content" id="content" rows="21" cols="50" class="form-control"></textarea>
 				</div>
@@ -91,18 +79,10 @@ if(Input::exists()){
 			<h1>Other Categories</h1>
 			<?php $forums->listCat(true, path)?>
 		</div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<?php include path.'assets/foot.php';?>
+		<script type="text/javascript" src="<?php echo path?>assets/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript">
-		function formatText(tag) {
-		   var Field = document.getElementById('content');
-		   var val = Field.value;
-		   var selected_txt = val.substring(Field.selectionStart, Field.selectionEnd);
-		   var before_txt = val.substring(0, Field.selectionStart);
-		   var after_txt = val.substring(Field.selectionEnd, val.length);
-			if(tag == "br"){Field.value += '[br]'}else if(tag == "img"){Field.value += '[img] [/img]'}else if(tag == 'link'){Field.value += '[link= ] [/link]'}else{
-			  Field.value += '[' + tag + ']' + '[/' + tag + ']';
-			}
-		}
+		$(CKEDITOR.replace('content'));
 		</script>
 	</body>
 </html>
