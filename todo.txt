@@ -1,0 +1,7 @@
+TODO:
+404 - error file
+Add more features in UserCP
+Create AdminCP
+Create ModCP
+Build the full permission system
+Finish validation
