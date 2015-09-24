@@ -1,0 +1,8 @@
+Created Beta 0.1.0
+Created Beta 0.1.1
+
+Beta 0.2.0
+- Changed content box
+- UserCP
+- ModCP
+- AdminCP
