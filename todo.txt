@@ -1,13 +1,29 @@
 TODO:
+General Items:
 404 - error file
-Add more features in UserCP
 Create AdminCP
 Create ModCP
-Build the full permission system
-Finish validation
-Add User Custom Themes
-Add Notifaction.
-Give id or unique id.
-Achivements?
-Address Info?
-Avatar upload...
+Finish validation errors on pages that requires validations.
+Survay?
+
+AdminCP:
+Custom Pages
+Categories list
+User list
+Groups list
+Permissions System
+Achivements system...
+Show rank image/text while posting.
+
+ModCP:
+tempban/ban users
+allow user for unlimited post.
+
+UserCP:
+Get there unique id from db.
+Private Messageing
+Custom themes
+Avatar Uploads
+Address Information
+Achivement system?
+Notifcation system.
