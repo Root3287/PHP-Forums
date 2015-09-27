@@ -10,7 +10,7 @@ if(Input::exists()){
 		if($validation->passed()){
 			if(Hash::make(escape(Input::get('oldPassword')), $user->data()->salt) == $user->data()->password);
 			$newPass = Hash::make(escape(Input::get('newPassword')), $user->data()->salt);
-			try{$user->update(array('password'=>$newPass), $user->data()->id); session::flash('complete', 'You have changed your password!');Redirect::to('');}catch (Exception $e){}
+			try{$user->update(array('password'=>$newPass), $user->data()->id); session::flash('complete', 'You have changed your password!');Redirect::to('');}catch (Exception $e){Session::flash('error', $e->getMessage()); Redirect::to('');}
 		}
 	}
 }

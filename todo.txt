@@ -20,6 +20,7 @@ tempban/ban users
 allow user for unlimited post.
 
 UserCP:
+Create Friends and or Follow.
 Get there unique id from db.
 Private Messageing
 Custom themes

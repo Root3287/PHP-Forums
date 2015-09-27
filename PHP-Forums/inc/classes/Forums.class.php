@@ -16,7 +16,7 @@ class Forums{
 		return $post_return;
 	}
 	public function getPost2($post){
-		return $this->_db->get('post', array('id','=',$post))->results();
+		return $this->_db->get('post', array('id','=',$post))->first();
 	}
 	public function listPost($c, $path=null){
 		if($c){

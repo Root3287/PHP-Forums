@@ -38,6 +38,7 @@ if(Input::exists()){
 						'date' => date('Y-m-d- H:i:s'),
 						'user_id' => $user->data()->id,
 					));
+					Notifaction::createMessage($user->data()->username.' posted a reply on your page', $forums->getPost2(Input::get('p'))->post_user);
 					session::flash('complete', 'You posted your reply!');
 					Redirect::to('view.php?c='.Input::get('c').'&p='.Input::get('p'));
 				}catch (Exception $e){

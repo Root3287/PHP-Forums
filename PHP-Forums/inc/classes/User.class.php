@@ -91,9 +91,6 @@ class User{
 	public function data(){
 		return $this->_data;
 	}
-	public function exist(){
-		return (!empty($this->data()))? true:false;
-	}
 	public function isLoggedIn(){
 		return $this->_isLogin;
 	}

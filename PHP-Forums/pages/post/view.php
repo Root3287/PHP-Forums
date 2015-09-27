@@ -18,6 +18,12 @@ $author = new User($post->post_user);
 	</head>
 	<body>
 		<?php include path.'assets/nav.php';?>
+		<?php if(Session::exists('error')):?>
+			<div class="alert alert-danger"><?php echo Session::flash('error')?></div>
+		<?php endif;?>
+		<?php if(Session::exists('complete')):?>
+			<div class="alert alert-success"><?php echo Session::flash('complete')?></div>
+		<?php endif;?>
 		<div class="col-md-9">
 			<h1><?php echo  $post->post_title; ?></h1>
 			<!-- USER FIRST POST -->
@@ -27,8 +33,18 @@ $author = new User($post->post_user);
 				<?php if($user->isLoggedIn()){?><a class="btn btn-xs btn-default" href="reply.php?c=<?php echo Input::get('c')?>&p=<?php echo Input::get('p');?>">Reply</a><?php }?>
 				</div>
 				<div class="panel-body">
+				<div class="row">
 				<div class="col-md-3"><?php echo "<img src='".$author->getAvatarURL(64)."'  class='img-circle'><br/>".$author->data()->username;?></div>
 				<div class="col-md-6"><?php echo BBCode::make($post->post_cont);?></div>
+				</div>
+				<div class="row">
+					<hr>
+				</div>
+				<div class="row">
+					<div class="container">
+					<?php echo $author->data()->signature?>
+					</div>
+				</div>
 				</div>
 			</div>
 			<!-- REPLY -->
@@ -39,8 +55,18 @@ $author = new User($post->post_user);
 					<?php if($user->isLoggedIn()){?><a class="btn btn-xs btn-default" href="reply.php?c=<?php echo Input::get('c')?>&p=<?php echo Input::get('p');?>">Reply</a><?php }?>
 					</div>
 					<div class="panel-body">
+						<div class="row">
 						<div class="col-md-3"><?php echo "<img src='{$author_reply->getAvatarURL(64)}' class='img-circle'><br/>".$author_reply->data()->username;?></div>
 						<div class="col-md-9"><?php echo BBCode::make($reply->content);?></div>
+						</div>
+						<div class="row">
+							<hr>
+				</div>
+				<div class="row">
+					<div class="container">
+					<?php echo $author_reply->data()->signature?>
+					</div>
+				</div>
 					</div>
 				</div>
 			<?php }?>

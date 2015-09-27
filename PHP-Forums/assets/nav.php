@@ -18,6 +18,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!-- Make mail -->
+        <?php if($user->isLoggedIn()){?><li><a href="<?php echo path?>pages/user/?page=notification"><span class="glyphicon glyphicon-inbox"></span><?php if(Notifaction::getUnreadCount($user->data()->id) > 0){?><span class="badge"><?php echo Notifaction::getUnreadCount($user->data()->id);?></span><?php }?></a></li><?php }?>
         <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-inbox"><span class="badge">999</span></span></a>
           <ul class="dropdown-menu">

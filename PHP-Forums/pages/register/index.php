@@ -52,8 +52,11 @@ if(Input::exists()){
 			}catch (Exception $e){
 				die($e->getMessage());
 			}
-			session::flash('complete', 'you completely register');
-			Redirect::to(path.'index.php');
+			if($user->login(escape(Input::get('username')), escape(Input::get('password')), false)){
+				Notifaction::createMessage('Welcome to the forums '. $user->data()->name, $user->data()->id);
+				session::flash('complete', 'You completely register and you just got logged in.');
+				Redirect::to(path.'index.php');
+			}
 		}
 	}
 }
