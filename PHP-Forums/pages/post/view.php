@@ -35,7 +35,7 @@ $author = new User($post->post_user);
 				<div class="panel-body">
 				<div class="row">
 				<div class="col-md-3"><?php echo "<img src='".$author->getAvatarURL(64)."'  class='img-circle'><br/>".$author->data()->username;?></div>
-				<div class="col-md-6"><?php echo BBCode::make($post->post_cont);?></div>
+				<div class="col-md-6"><?php echo $post->post_cont?></div>
 				</div>
 				<div class="row">
 					<hr>
@@ -57,7 +57,7 @@ $author = new User($post->post_user);
 					<div class="panel-body">
 						<div class="row">
 						<div class="col-md-3"><?php echo "<img src='{$author_reply->getAvatarURL(64)}' class='img-circle'><br/>".$author_reply->data()->username;?></div>
-						<div class="col-md-9"><?php echo BBCode::make($reply->content);?></div>
+						<div class="col-md-9"><?php echo $reply->content?></div>
 						</div>
 						<div class="row">
 							<hr>
