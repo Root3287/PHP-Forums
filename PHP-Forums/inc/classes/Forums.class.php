@@ -1,4 +1,9 @@
 <?php
+/*
+* Timothy Gibbons
+* Copyright (c) Timothy Gibbons 2015, All Rights Reserved; 
+* License: MIT
+*/
 class Forums{
 	private $_db;
 	public function __construct(){
