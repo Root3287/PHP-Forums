@@ -61,8 +61,9 @@ if(Input::exists()){
 	</head>
 	<body>
 		<?php include path.'assets/nav.php';?>
+		<div class="row">
 		<div class="col-md-9">
-			<h1>New Post</h1>
+			<h1>New Reply</h1>
 			<form action="" method="post">
 				<div class="form-group">
 					<input name="title" type="text" placeholder="Title" class="form-control input-lg">
@@ -79,6 +80,7 @@ if(Input::exists()){
 		<div class="col-md-3">
 			<h1>Other Categories</h1>
 			<?php $forums->listCat(true, path)?>
+		</div>
 		</div>
 		<?php include path.'assets/foot.php';?>
 		<script type="text/javascript" src="<?php echo path?>assets/js/ckeditor/ckeditor.js"></script>

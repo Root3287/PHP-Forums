@@ -107,6 +107,10 @@ class Forums{
 		$where = ($id)? array('id', '=', $id): array('1','=','1');
 		return $this->_db->get('cat', $where)->results();
 	}
+	public function getCatParent($id = null){
+		$id = ($id)? " AND id={$id}":'';
+		return $this->_db->query('SELECT * FROM `cat` WHERE parent IS NULL'.$id)->results();
+	}
 	public function createPost($fields = array()){
 		if(!$this->_db->insert('post', $fields)){
 			throw new Exception('There was an error inserting the data to the database.');
@@ -115,6 +119,11 @@ class Forums{
 	public function createReply($fields = array()){
 		if(!$this->_db->insert('reply', $fields)){
 			throw new Exception('There was an error inserting the data to the database.');
+		}
+	}
+	public function createCat($fields = array()){
+		if(!$this->_db->insert('cat', $fields)){
+			throw new Exception('Cannot insert cat!');
 		}
 	}
 }
