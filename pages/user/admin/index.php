@@ -49,6 +49,7 @@ if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
 					include 'cat.php';
 					break;
 				case 'groups':
+					include 'group.php';
 					break;
 				case 'notification':
 					include 'notification.php';
