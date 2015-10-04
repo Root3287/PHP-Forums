@@ -72,6 +72,7 @@ if(Input::exists()){
 					<textarea placeholder="Content" name="content" id="content" rows="21" cols="50" class="form-control"></textarea>
 				</div>
 				<div class="form-group">
+				<br/>
 					<input type="hidden" name="token" value="<?php echo Token::generate()?>">
 					<input class="btn btn-lg btn-block btn-primary" name="Submit" type="submit" value="Submit">
 				</div>

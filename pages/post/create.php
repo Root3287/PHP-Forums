@@ -72,6 +72,7 @@ if(Input::exists()){
 				</div>
 				<div class="form-group">
 					<input type="hidden" name="token" value="<?php echo Token::generate()?>">
+					<br/>
 					<input class="btn btn-lg btn-block btn-primary" name="Submit" type="submit" value="Submit">
 				</div>
 			</form>
@@ -84,7 +85,7 @@ if(Input::exists()){
 		<?php include path.'assets/foot.php';?>
 		<script type="text/javascript" src="<?php echo path ?>assets/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript">
-			$(CKEDITOR.replace('content'));
+			CKEDITOR.replace('content');
 		</script>
 	</body>
 </html>
