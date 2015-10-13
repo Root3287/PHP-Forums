@@ -17,6 +17,10 @@ if(!$user->isLoggedIn()){
 	Redirect::to(path.'index.php');
 }
 
+$db = DB::getInstance();
+
+$q = $db->get('post', array('id', '=', escape(Input::get('p'))))->first();
+
 if(Input::exists()){
 	if(Input::get('Submit')){
 		if(Token::check(Input::get('token'))){
@@ -61,12 +65,13 @@ if(Input::exists()){
 	</head>
 	<body>
 		<?php include path.'assets/nav.php';?>
+		<div class="container">
 		<div class="row">
 		<div class="col-md-9">
 			<h1>New Reply</h1>
 			<form action="" method="post">
 				<div class="form-group">
-					<input name="title" type="text" placeholder="Title" class="form-control input-lg">
+					<input name="title" type="text" placeholder="Title" value="RE: <?php echo $q->post_title ?>" class="form-control input-lg">
 				</div>
 				<div class="form-group">
 					<textarea placeholder="Content" name="content" id="content" rows="21" cols="50" class="form-control"></textarea>
@@ -81,6 +86,7 @@ if(Input::exists()){
 		<div class="col-md-3">
 			<h1>Other Categories</h1>
 			<?php $forums->listCat(true, path)?>
+		</div>
 		</div>
 		</div>
 		<?php include path.'assets/foot.php';?>

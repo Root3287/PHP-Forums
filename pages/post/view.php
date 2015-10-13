@@ -24,6 +24,7 @@ $author = new User($post->post_user);
 		<?php if(Session::exists('complete')):?>
 			<div class="alert alert-success"><?php echo Session::flash('complete')?></div>
 		<?php endif;?>
+		<div class="container">
 		<div class="row">
 			<div class="col-md-9">
 				<h1><?php echo  $post->post_title; ?></h1>
@@ -91,6 +92,7 @@ $author = new User($post->post_user);
 				<h1>Other Categories</h1>
 				<?php $forums->listCat(true, path)?>
 			</div>
+		</div>
 		</div>
 		<?php include path.'assets/foot.php';?>
 	</body>
