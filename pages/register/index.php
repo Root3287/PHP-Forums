@@ -29,9 +29,7 @@ if(Input::exists()){
 				)
 		));
 		if(!$val->passed()){
-			foreach ($val->errors() as $error){
-				echo $error.'<br/>';
-			}
+			
 		}else{
 			$user = new User();
 			
@@ -68,6 +66,9 @@ if(Input::exists()){
 	<body>
 		<?php include path.'assets/nav.php';?>
 		<div class="container">
+			<?php if(Input::exists()): if(Token::check(Input::get('token'))): if(!$val->passed()):?>
+				<div class="alert alert-danger"><?php foreach ($val->errors() as $error){echo $error.'<br/>';}?></div>
+			<?php endif;endif;endif;?>
 			<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 				<h1>Register</h1>
 				<form action="" method="post">
@@ -108,5 +109,6 @@ if(Input::exists()){
 				</form>
 			</div>
 		</div>
+		<?php include path.'assets/foot.php';?>
 	</body>
 </html>
