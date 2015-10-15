@@ -3,6 +3,10 @@ define('path', '../../');
 include path.'inc/init.php';
 $user = new User();
 $db = DB::getInstance();
+if(!$user->isLoggedIn()){
+	Session::flash('error', 'You are not logged in!');
+	Redirect::to(path);
+}
 if($_GET == null){}
 ?>
 <html>

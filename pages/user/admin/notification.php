@@ -9,16 +9,23 @@ if(Input::exists()){
 		));
 		if($validation->passed()){
 			foreach($db->get('users', array('1','=','1'))->results() as $userAcc){
-				try{Notifaction::createMessage(Input::get('message'), $userAcc->id); Session::flash('complete', 'You sent a mass message!');Redirect::to('');}catch (Exception $e){}
+				try{Notifaction::createMessage(Input::get('message'), $userAcc->id); Session::flash('complete', 'You sent a mass message!');Redirect::to('?page=notification');}catch (Exception $e){}
 			}
 		}
 	}
 }
 ?>
-<form action="?page=notification" method="post">
- 	<textarea rows="20" cols="20" name="message" id="message"></textarea>
- 	<input type="hidden" name="token" value="<?php echo Token::generate()?>">
- 	<div class="form-group">
- 		<input class="btn btn-primary" type="submit" value="Submit">
- 	</div>
-</form>
+<div class="row">
+	<h1>Send Mass Message</h1>
+</div>
+<div class="row">
+	<form action="?page=notification" method="post">
+	 	<div class="form-group">
+	 		<textarea class="form-control" rows="20" cols="20" name="message" id="message"></textarea><br/>
+	 	</div>
+	 	<input type="hidden" name="token" value="<?php echo Token::generate()?>">
+	 	<div class="form-group">
+	 		<input class="form-control btn btn-primary" type="submit" value="Submit">
+	 	</div>
+	</form>
+</div>

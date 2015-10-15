@@ -55,6 +55,9 @@ if(Input::exists()){
 				Email
 			</td>
 			<td>
+				Group
+			</td>
+			<td>
 				Joined
 			</td>
 			<td>
@@ -77,6 +80,9 @@ if(Input::exists()){
 				</td>
 				<td>
 					<?php echo $users->email?>
+				</td>
+				<td>
+					<?php echo $users->group?>
 				</td>
 				<td>
 					<?php echo $users->joined?>

@@ -47,7 +47,7 @@ if(Input::exists()){
 			</div>
 			<div class="form-group">
 				 <select name="cat_par">
-				  <option <?php if(!$forums->getCat(Input::get('c'))[0]->parent):?>selected="selected"<?php endif;?> value="NULL">NULL</option>
+				  <option <?php if(!$forums->getCat(Input::get('c'))[0]->parent):?>selected="selected"<?php endif;?> value="NULL">No parent</option>
 				  <?php foreach ($forums->getCatParent() as $cat):?>
 				  	<option <?php if($forums->getCat(Input::get('c'))[0]->parent == $cat->id):?>selected="selected"<?php endif;?> value="<?php echo $cat->id;?>"><?php echo $cat->name;?></option>
 				  <?php endforeach;?>

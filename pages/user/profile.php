@@ -24,9 +24,9 @@ if(Input::exists('post')){
     		</label><br>
     		
 	</div>
-	<textarea id="sign" name="sign"><?php echo $user->data()->signature;?></textarea>
+	<div class="form-group"><textarea class="form-control" id="sign" name="sign"><?php echo $user->data()->signature;?></textarea></div><br/>
 	<div class="form-group">
     		<input type="hidden" name="token" value="<?php echo Token::generate()?>">
-    		<input class="btn btn-primary" type="submit" value="Submit">
+    		<input class="form-control btn btn-primary" type="submit" value="Submit">
     	</div>
 </form>

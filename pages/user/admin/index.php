@@ -11,6 +11,13 @@ if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
 <html>
 	<head>
 		<?php require path.'assets/head.php';?>
+		<?php if(Input::get('page') == 'cat'):?>
+		<style type="text/css">
+		a.white{
+			color: white;
+		}
+		</style>
+		<?php endif;?>
 	</head>
 	<body>
 		<?php require path.'assets/nav.php';?>

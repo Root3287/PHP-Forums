@@ -83,6 +83,20 @@ class DBHelper{
     			'value'=>'cosmo',	
     		),
     		),
+    		6 => array(
+    		6 => array(
+    			'table'=>'settings',
+    			'name'=> 'front-title',
+    			'value'=>'Forums',
+    		),
+    		),
+    		7 => array(
+    		7 => array(
+    			'table'=>'settings',
+    			'name'=> 'motd',
+    			'value'=>'',
+    		),
+    		),
     );
     
     $j = 0;
@@ -93,7 +107,7 @@ class DBHelper{
     	))){
     		$this->addMessage('There was an error adding row: '.$j);
     	}else{
-    		echo $j.' row added!';
+    		echo $j.' row added!<br/>';
     	}
     	$j++;
     }
