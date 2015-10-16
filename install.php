@@ -86,15 +86,15 @@ class DBHelper{
     		6 => array(
     		6 => array(
     			'table'=>'settings',
-    			'name'=> 'front-title',
-    			'value'=>'Forums',
+    			'name'=> 'motd',
+    			'value'=>'',
     		),
     		),
     		7 => array(
     		7 => array(
     			'table'=>'settings',
-    			'name'=> 'motd',
-    			'value'=>'',
+    			'name'=> 'debug',
+    			'value'=>'Off',
     		),
     		),
     );

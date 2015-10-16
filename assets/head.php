@@ -8,3 +8,6 @@
 <meta name="keywords" content="Forums">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<?php echo path.'assets/css/'.Setting::get('bootstrap-theme').'.css';?>">
+<!-- Latest compiled and minified JavaScript -->
+<script src="<?php echo path.'assets/js/jquery.js';?>"></script>
+<script src="<?php echo path.'assets/js/bootstrap.js';?>"></script>

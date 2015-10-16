@@ -26,7 +26,7 @@ $forums = new Forums();
 				}
 			?>
 			<div class="jumbotron">
-				<h1><?php Setting::show('front-title')?></h1><br/>
+				<h1><?php Setting::show('title')?></h1><br/>
 				<h3><?php Setting::show('motd')?></h3>
 			</div>
 			<div class="col-md-9">

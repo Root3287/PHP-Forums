@@ -26,7 +26,7 @@ if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
 			<div class="alert alert-success"><?php echo Session::flash('complete')?></div>
 			<?php endif;?>
 			<?php if(Session::exists('error')):?>
-			<div class="alert alert-success"><?php echo Session::flash('error')?></div>
+			<div class="alert alert-error"><?php echo Session::flash('error')?></div>
 			<?php endif;?>
 		<div class="col-md-3">
 		<div class="well">

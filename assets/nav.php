@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo path;?>"><?php echo Config::get('config/name')?></a>
+      <a class="navbar-brand" href="<?php echo path;?>"><?php echo Setting::get('title')?></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
