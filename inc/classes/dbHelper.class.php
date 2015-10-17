@@ -1,11 +1,4 @@
 <?php
-/*
-* Timothy Gibbons
-* Copyright (c) Timothy Gibbons 2015, All Rights Reserved; 
-* License: MIT
-*/
-define('path', '');
-require path.'inc/init.php';
 class DBHelper{
   private $_db, $_smessage, $_emessage, $_error = false;
   
@@ -134,18 +127,4 @@ class DBHelper{
   public function hasError(){
     return ($this->_error)? true:false;
   }
-}
-
-$start = new dbHelper();
-
-if(!$start->startTables()->hasError()){
-	foreach($start->getMessage() as $message){
-		echo $message.'<br/>';
-	}
-	echo 'You can delete this file!';
-}else{
-	foreach($start->getError() as $message){
-		echo $message.'<br/>';
-	}
-	die();
 }

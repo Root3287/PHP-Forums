@@ -16,12 +16,13 @@
 			));
 			
 			if($validate->passed()){
-				if(Setting::update('title', Input::get('title')) && Setting::update('motd', Input::get('motd')) && Setting::update('theme', Input::get('theme'))){
+				$debug = (Input::get('debug') == 'on')? 'On':'Off';
+				if(Setting::update('title', Input::get('title')) && Setting::update('motd', Input::get('motd')) && Setting::update('bootstrap-theme', Input::get('theme')) && Setting::update('debug', $debug)){
 					Session::flash('complete', 'You have updated the site!');
 					Redirect::to('?page=settings');
 				}else{
-					Session::flash('error', 'Something wrong updating this site!');
-					Redirect::to('?page=settings');
+					//Session::flash('error', 'Something wrong updating this site!');
+					//Redirect::to('?page=settings');
 				}
 			}
 		}else{

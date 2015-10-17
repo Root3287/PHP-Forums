@@ -31,7 +31,7 @@ $forums = new Forums();
 			</div>
 			<div class="col-md-9">
 			<?php 
-			$forums->listCat(false, '');
+			if(!$forums->getCat()){echo '<div class="alert alert-info">There is no categoies at this time please contact an administrator!</div>';}else{$forums->listCat(false, '');}
 			?>
 			</div>
 		</div>

@@ -7,6 +7,9 @@ if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
 	session::flash('error', 'You do not have access the admin page!');
 	Redirect::to('../');
 }
+if(file_exists(path.'install/index.php')){
+	rename(path.'install/index.php', path.'install/index-disable.php');
+}
 ?>
 <html>
 	<head>
@@ -26,7 +29,7 @@ if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
 			<div class="alert alert-success"><?php echo Session::flash('complete')?></div>
 			<?php endif;?>
 			<?php if(Session::exists('error')):?>
-			<div class="alert alert-error"><?php echo Session::flash('error')?></div>
+			<div class="alert alert-danger"><?php echo Session::flash('error')?></div>
 			<?php endif;?>
 		<div class="col-md-3">
 		<div class="well">
@@ -36,6 +39,7 @@ if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
 			<a href="?page=notification">Send Mass Notification</a><br/>
 			<a href="?page=groups">Manage Groups</a><br/>
 			<a href="?page=user">Manage Users</a><br/>
+			<a href="?page=error">Force an error</a>
 		</div>
 		</div>
 		<div class="col-md-9">
@@ -61,6 +65,9 @@ if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
 				case 'notification':
 					include 'notification.php';
 					break;
+			}
+			if(Input::get('page') == 'error'){
+				include 'error.php';
 			}
 			?>
 		</div>
