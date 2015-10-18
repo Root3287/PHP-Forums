@@ -46,7 +46,7 @@
 			<option <?php if(Setting::get('bootstrap-theme') == 'cerulean'):?>selected="selected"<?php endif;?> value="cerulean">Cerulean</option>
 			<option <?php if(Setting::get('bootstrap-theme') == 'cosmo'):?>selected="selected"<?php endif;?> 	value="cosmo">Cosmo</option>
 			<option <?php if(Setting::get('bootstrap-theme') == 'cyborg'):?>selected="selected"<?php endif;?> 	value="cyborg">Cyborg</option>
-			<option <?php if(Setting::get('bootstrap-theme') == 'darkley'):?>selected="selected"<?php endif;?> 	value="darkley">Darkly</option>
+			<option <?php if(Setting::get('bootstrap-theme') == 'darkly'):?>selected="selected"<?php endif;?> 	value="darkly">Darkly</option>
 			<option <?php if(Setting::get('bootstrap-theme') == 'flatly'):?>selected="selected"<?php endif;?> 	value="flatly">Flatly</option>
 			<option <?php if(Setting::get('bootstrap-theme') == 'journal'):?>selected="selected"<?php endif;?> 	value="journal">Journal</option>
 			<option <?php if(Setting::get('bootstrap-theme') == 'lumen'):?>selected="selected"<?php endif;?> 	value="lumen">Lumen</option>
