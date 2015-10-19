@@ -7,3 +7,6 @@ Beta 0.2.0
 - ModCP
 - AdminCP
 - Install GUI
+
+Beta 0.2.1
+- Fix bugs
