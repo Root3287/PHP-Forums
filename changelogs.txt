@@ -6,3 +6,4 @@ Beta 0.2.0
 - UserCP
 - ModCP
 - AdminCP
+- Install GUI
