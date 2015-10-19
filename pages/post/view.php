@@ -32,13 +32,13 @@ $author = new User($post->post_user);
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 					<?php echo $post->post_title;?>
-					<?php if($user->isLoggedIn()){?><a class="btn btn-xs btn-default" href="reply.php?c=<?php echo Input::get('c')?>&p=<?php echo Input::get('p');?>">Reply</a><?php }?>
+					<div class="pull-right"><?php if($user->isLoggedIn()){?><a class="btn btn-xs btn-default" href="reply.php?c=<?php echo Input::get('c')?>&p=<?php echo Input::get('p');?>">Reply</a><?php }?></div>
 					</div>
 					<div class="panel-body">
 					<div class="row">
 					<div class="col-md-3">
 						<?php echo "<img src='".$author->getAvatarURL(64)."'  class='img-circle'><br/>".$author->data()->username;?>
-						<?php if($user->hasPermission('Mod')):?>
+						<?php if($user->isLoggedIn() && $user->hasPermission('Mod')):?>
 							<div class="dropdown">
 			  					<button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 				   				 	<span class="glyphicon glyphicon-th"></span>

@@ -6,10 +6,10 @@ $user = new User();
 
 if(Input::exists('get')){
 	if(!$forums->getCat(escape(Input::get('c')))){
-		die();//Redirect::to(path.'404.php') // TODO MAKE 404
+		Redirect::to(path.'404.php'); // TODO MAKE 404
 	}
 }else{
-	die();//Redirect::to(path.'404.php'); //TODO: MAKE 404
+	Redirect::to(path.'404.php'); //TODO: MAKE 404
 }
 
 if(!$user->isLoggedIn()){
@@ -38,19 +38,18 @@ if(Input::exists()){
 						'post_date' => date('Y-m-d- H:i:s'),
 						'post_user' => $user->data()->id,
 					));
+					$db= DB::getInstance();
+					$post = $db->get('post',array('1','=','1'))->count();
+					$post = $post;
 					session::flash('complete', 'You posted your post!');
-					Redirect::to(path);
+					Redirect::to(path."pages/post/view.php?c=".Input::get('c')."&p=".$post);		
 				}catch (Exception $e){
 					die($e->getMessage());
 				}
 			}else{
-				echo 'val not passed';
 			}
 		}else{
-			die('token failed');
 		}
-	}else{
-		die('submit');
 	}
 }
 ?>
