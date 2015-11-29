@@ -1,7 +1,5 @@
 <?php
-define('path', '../');
-include path.'inc/init.php';
-
+require '../inc/init.php';
 if(!Input::exists('get')){
 	$step = 'home';
 }else{
@@ -141,10 +139,10 @@ if(Input::exists()){
 		<meta name="description" content="Forums">
 		<meta name="keywords" content="Forums">
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="<?php echo path.'assets/css/cosmo.css';?>">
+		<link rel="stylesheet" href="<?php echo '../assets/css/cosmo.css';?>">
 		<!-- Latest compiled and minified JavaScript -->
-		<script src="<?php echo path.'assets/js/jquery.js';?>"></script>
-		<script src="<?php echo path.'assets/js/bootstrap.js';?>"></script>
+		<script src="<?php echo '../assets/js/jquery.js';?>"></script>
+		<script src="<?php echo '../assets/js/bootstrap.js';?>"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -241,6 +239,6 @@ if(Input::exists()){
 		<?php
 		}?>
 		</div>
-		<?php include path.'assets/foot.php';?>
+		<?php include '../assets/foot.php';?>
 	</body>
 </html>

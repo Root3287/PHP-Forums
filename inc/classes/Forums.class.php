@@ -23,7 +23,7 @@ class Forums{
 	public function getPost2($post){
 		return $this->_db->get('post', array('id','=',$post))->first();
 	}
-	public function listPost($c, $path=null){
+	public function listPost($c){
 		if($c){
 			echo "<table class='table table-striped table-hover'><thead><tr><th>ID #</th><th>Name</th><th>User</th></tr></thead><tbody>";
 			foreach($this->getPost($c) as $post){
@@ -31,12 +31,12 @@ class Forums{
 				$author = $author->data();
 				echo "<tr>
 				<td>
-				<a href='{$path}pages/post/view.php?c={$c}&p={$post->id}'>
+				<a href='/forums/view.php?c={$c}&p={$post->id}'>
 				{$post->id}
 				</a>
 				</td>
 				<td>
-				<a href='{$path}pages/post/view.php?c={$c}&p={$post->id}'>
+				<a href='/forums/view.php?c={$c}&p={$post->id}'>
 				{$post->post_title}
 				</a>
 				</td>
@@ -80,7 +80,7 @@ class Forums{
 			foreach ($this->listParentCat() as $parent){
 				echo "<b>{$parent['name']}</b><br>";
 				foreach ($this->listChildCat($parent['id']) as $child){
-					echo "<a href='{$path}pages/post/?cat={$child['id']}'>{$child['name']}</a><br/>";
+					echo "<a href='/forums/post/?cat={$child['id']}'>{$child['name']}</a><br/>";
 				}
 			}
 			echo '</div>';
@@ -88,7 +88,7 @@ class Forums{
 			foreach ($this->listParentCat() as $parent){
 				echo "<div class='panel panel-primary'><div class='panel-heading'>{$parent['name']}</div><div class='panel-body'>";
 				foreach ($this->listChildCat($parent['id']) as $child){
-					echo "<a href='{$path}pages/post?cat={$child['id']}'>{$child['name']}</a><br/>";
+					echo "<a href='/forums/post?cat={$child['id']}'>{$child['name']}</a><br/>";
 				}
 				echo "</div></div>";
 			}

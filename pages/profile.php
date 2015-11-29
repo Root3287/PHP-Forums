@@ -1,13 +1,11 @@
 <?php
-define('path', '../../');
-require path.'inc/init.php';
 if(!$username = Input::get('u')){
-	die();//MAke 404
+	redirect::to('/404');//MAke 404
 }
 $user = new User();
 $user2 = new User(Input::get('u'));
 if(!$user2->exists()){
-	die(); // Make 404
+	Redirect::to('/404'); // Make 404
 }
 ?>
 <html>

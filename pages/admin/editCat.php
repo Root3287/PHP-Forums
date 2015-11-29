@@ -1,15 +1,13 @@
 <?php
-define('path', '../../../');
-require path.'inc/init.php';
 $forums = new Forums();
 $user = new User();
 if(!$user->hasPermission('Admin') || !$user->isLoggedIn()){
 	Session::flash('error', 'You have to be admin/login for that!');
-	Redirect::to(path);
+	Redirect::to('/');
 }
 if(Input::get('c') == null){
 	session::flash('error', 'you don\'t have the proper link');
-	Redirect::to(path.'pages/user/admin/');
+	Redirect::to('/admin');
 }
 if(Input::exists()){
 	if(Token::check(Input::get('token'))){
@@ -28,7 +26,7 @@ if(Input::exists()){
 			));
 			if($update){
 				session::flash('complete', 'You have updated the category');
-				Redirect::to(path.'pages/user/admin/');
+				Redirect::to('/admin');
 			}
 		}
 	}
@@ -36,10 +34,10 @@ if(Input::exists()){
 ?>
 <html>
 	<head>
-		<?php require path.'assets/head.php';?>
+		<?php require 'assets/head.php';?>
 	</head>
 	<body>
-		<?php require path.'assets/nav.php';?>
+		<?php require 'assets/nav.php';?>
 		<div class="container">
 		<form method="post" action="">
 			<div class="form-group">
@@ -59,6 +57,6 @@ if(Input::exists()){
 			</div>
 		</form>
 		</div>
-		<?php require path.'assets/foot.php';?>
+		<?php require 'assets/foot.php';?>
 	</body>
 </html>

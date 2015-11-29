@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(Input::exists()){
 	if(token::check(Input::get('token'))){
 		$val = new Validation();

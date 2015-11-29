@@ -1,6 +1,4 @@
 <?php
-define('path', '../../');
-require path.'inc/init.php';
 $user = new User();
 if(Input::exists()){
 	if(Token::check(Input::get('token'))){
@@ -53,7 +51,7 @@ if(Input::exists()){
 			if($user->login(escape(Input::get('username')), escape(Input::get('password')), false)){
 				Notifaction::createMessage('Welcome to the forums '. $user->data()->name, $user->data()->id);
 				session::flash('complete', 'You completely register and you just got logged in.');
-				Redirect::to(path.'index.php');
+				Redirect::to('/');
 			}
 		}
 	}
@@ -96,7 +94,7 @@ if(Input::exists()){
 					<div class="row">
 						<div class="col-xs-12 col-md-6">
 							<div class="form-group">
-								<a href="../../pages/login" class="btn btn-lg btn-block btn-danger">Login</a>
+								<a href="/login" class="btn btn-lg btn-block btn-danger">Login</a>
 							</div>
 						</div>
 						<div class="col-xs-12 col-md-6">

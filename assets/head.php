@@ -7,7 +7,7 @@
 <meta name="description" content="Forums">
 <meta name="keywords" content="Forums">
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<?php echo path.'assets/css/'.Setting::get('bootstrap-theme').'.css';?>">
+<link rel="stylesheet" href="<?php echo 'assets/css/'.Setting::get('bootstrap-theme').'.css';?>">
 <!-- Latest compiled and minified JavaScript -->
-<script src="<?php echo path.'assets/js/jquery.js';?>"></script>
-<script src="<?php echo path.'assets/js/bootstrap.js';?>"></script>
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/bootstrap.js"></script>

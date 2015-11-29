@@ -1,11 +1,9 @@
 <?php
-define('path', '../../');
-require path.'inc/init.php';
 $user= new User();
 $forums = new Forums();
 if(!Input::exists('get')){
 	session::flash('error', 'There was no valid page! You have been taken back to the homepage!');
-	Redirect::to(path.'index.php');
+	Redirect::to('/');
 }
 
 $post = $forums->getPost(Input::get('c'), Input::get('p'));
@@ -14,10 +12,10 @@ $author = new User($post->post_user);
 ?>
 <html>
 	<head>
-		<?php include path.'assets/head.php';?>
+		<?php include 'assets/head.php';?>
 	</head>
 	<body>
-		<?php include path.'assets/nav.php';?>
+		<?php include 'assets/nav.php';?>
 		<?php if(Session::exists('error')):?>
 			<div class="alert alert-danger"><?php echo Session::flash('error')?></div>
 		<?php endif;?>

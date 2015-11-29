@@ -1,2 +1,5 @@
-IndexIgnore *
-Options -Indexes
+Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^.*$ index.php

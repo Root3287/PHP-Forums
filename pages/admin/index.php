@@ -1,14 +1,12 @@
 <?php
-define('path', '../../../');
-require path.'inc/init.php';
 $user= new User();
 $forums = new Forums();
 if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
 	session::flash('error', 'You do not have access the admin page!');
-	Redirect::to('../');
+	Redirect::to('/');
 }
 if(file_exists(path.'install/index.php')){
-	rename(path.'install/index.php', path.'install/index-disable.php');
+	rename('pages/install.php', 'pages/install-disable.php');
 }
 ?>
 <html>

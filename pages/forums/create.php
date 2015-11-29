@@ -1,15 +1,13 @@
 <?php
-define('path', '../../');
-require path.'inc/init.php';
 $forums = new Forums();
 $user = new User();
 
 if(Input::exists('get')){
 	if(!$forums->getCat(escape(Input::get('c')))){
-		Redirect::to(path.'404.php'); // TODO MAKE 404
+		Redirect::to('/404'); // TODO MAKE 404
 	}
 }else{
-	Redirect::to(path.'404.php'); //TODO: MAKE 404
+	Redirect::to('/404'); //TODO: MAKE 404
 }
 
 if(!$user->isLoggedIn()){
@@ -42,7 +40,7 @@ if(Input::exists()){
 					$post = $db->get('post',array('1','=','1'))->count();
 					$post = $post;
 					session::flash('complete', 'You posted your post!');
-					Redirect::to(path."pages/post/view.php?c=".Input::get('c')."&p=".$post);		
+					Redirect::to("/forums/view.php?c=".Input::get('c')."&p=".$post);		
 				}catch (Exception $e){
 					die($e->getMessage());
 				}

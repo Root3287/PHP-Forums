@@ -1,15 +1,13 @@
 <?php
-define('path', '../../');
-require path.'inc/init.php';
 $forums = new Forums();
 $user = new User();
 ?>
 <html>
 	<head>
-		<?php include path.'assets/head.php';?>
+		<?php include 'assets/head.php';?>
 	</head>
 	<body>
-		<?php include path.'assets/nav.php';?>
+		<?php include 'assets/nav.php';?>
 		<div class="container">
 			<div class="col-md-9">
 				<?php 
@@ -35,6 +33,6 @@ $user = new User();
 				<?php $forums->listCat(true, path);?>
 			</div>
 		</div>
-		<?php include path.'assets/foot.php'?>
+		<?php include 'assets/foot.php'?>
 	</body>
 </html>

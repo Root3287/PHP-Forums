@@ -1,8 +1,10 @@
 <?php
-define('path', '../../../');
-require path.'inc/init.php';
 $user = new User();
-$forums = new Forums();
+if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
+	Session::flash('error', 'You are not admin/logged in!');
+	Redirect::to('/');
+}
+
 if(Input::exists()){
 	if(Token::check(Input::get('token'))){
 		$val = new Validation();
@@ -22,7 +24,7 @@ if(Input::exists()){
 				'parent'=>$parent,
 			));
 			Session::flash('complete', 'You added a cat!');
-			Redirect::to(path.'pages/user/admin/');
+			Redirect::to('/admin');
 			}catch (Exception $e){
 				
 			}
@@ -32,10 +34,10 @@ if(Input::exists()){
 ?>
 <html>
 	<head>
-		<?php require path.'assets/head.php';?>
+		<?php require 'assets/head.php';?>
 	</head>
 	<body>
-		<?php require path.'assets/nav.php';?>
+		<?php require 'assets/nav.php';?>
 		<div class="container">
 		<form method="post" action="">
 			<div class="form-group">
@@ -55,6 +57,6 @@ if(Input::exists()){
 			</div>
 		</form>
 		</div>
-		<?php require path.'assets/foot.php';?>
+		<?php require 'assets/foot.php';?>
 	</body>
 </html>

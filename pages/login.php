@@ -1,6 +1,4 @@
 <?php 
-define('path', '../../');
-require path.'inc/init.php';
 $user = new User();
 if(Input::exists()){
 	if(Token::check(Input::get('token'))){
@@ -19,7 +17,7 @@ if(Input::exists()){
 			$login = $user2->login(escape(Input::get('username')), Input::get('password'), $remember);
 			if($login){
 				//Session::flash('complete', 'You have been logged in!');
-				Redirect::to(path.'index.php');
+				Redirect::to('/');
 			}
 		}else{
 			
@@ -29,10 +27,10 @@ if(Input::exists()){
 ?>
 <html>
 	<head>
-	<?php include path.'assets/head.php';?>
+	<?php include 'assets/head.php';?>
 	</head>
 	<body>
-		<?php include path.'assets/nav.php';?>
+		<?php include 'assets/nav.php';?>
 		<div class="container">
 			<?php if(Input::exists()): if(Token::check(Input::get('token'))): if(!$val->passed()):?>
 			<div class="alert alert-danger"><?php foreach ($val->errors() as $error){echo $error.'<br/>';}?></div>
@@ -67,6 +65,6 @@ if(Input::exists()){
 				</form>
 			</div>
 		</div>
-		<?php include path.'assets/foot.php';?>
+		<?php include 'assets/foot.php';?>
 	</body>
 </html>

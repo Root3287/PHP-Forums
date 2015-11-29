@@ -1,6 +1,4 @@
 <?php
-define('path', '../../');
-require path.'inc/init.php';
 $forums = new Forums();
 $user = new User();
 
@@ -14,7 +12,7 @@ if(Input::exists('get')){
 
 if(!$user->isLoggedIn()){
 	Session::flash('error', 'It seems you are not logged in!');
-	Redirect::to(path.'index.php');
+	Redirect::to('/');
 }
 
 $db = DB::getInstance();
@@ -44,7 +42,7 @@ if(Input::exists()){
 					));
 					Notifaction::createMessage($user->data()->username.' posted a reply on your page', $forums->getPost2(Input::get('p'))->post_user);
 					session::flash('complete', 'You posted your reply!');
-					Redirect::to('view.php?c='.Input::get('c').'&p='.Input::get('p'));
+					Redirect::to('/forums/view.php?c='.Input::get('c').'&p='.Input::get('p'));
 				}catch (Exception $e){
 					die($e->getMessage());
 				}
@@ -61,10 +59,10 @@ if(Input::exists()){
 ?>
 <html>
 	<head>
-	<?php Include path.'assets/head.php';?>
+	<?php Include 'assets/head.php';?>
 	</head>
 	<body>
-		<?php include path.'assets/nav.php';?>
+		<?php include 'assets/nav.php';?>
 		<div class="container">
 		<div class="row">
 		<div class="col-md-9">
@@ -85,12 +83,12 @@ if(Input::exists()){
 		</div>
 		<div class="col-md-3">
 			<h1>Other Categories</h1>
-			<?php $forums->listCat(true, path)?>
+			<?php $forums->listCat(true)?>
 		</div>
 		</div>
 		</div>
-		<?php include path.'assets/foot.php';?>
-		<script type="text/javascript" src="<?php echo path?>assets/js/ckeditor/ckeditor.js"></script>
+		<?php include 'assets/foot.php';?>
+		<script type="text/javascript" src="/assets/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript">
 		$(CKEDITOR.replace('content'));
 		</script>

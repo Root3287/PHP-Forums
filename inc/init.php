@@ -2,13 +2,19 @@
 
 session_start();
 
-spl_autoload_register(function($class){
-	require path.'inc/classes/'.$class.'.class.php';
-});
+if(!file_exists('../install/index.php')){
+	spl_autoload_register(function($class){
+		require 'inc/classes/'.$class.'.class.php';
+	});
+}else{
+	spl_autoload_register(function($class){
+		require '../inc/classes/'.$class.'.class.php';
+	});
+}
 
 require_once 'sanitize.php';
 
-if(!file_exists(path.'install/index.php')){
+if(!file_exists('../install/index.php')){
 	$db = DB::getInstance();
 	if(Cookies::exists(Config::get('session/cookie_name')) && !Session::exists(Config::get('session/session_name'))){
 		$hash = Cookies::get(Config::get('session/cookie_name'));
@@ -22,5 +28,5 @@ if(!file_exists(path.'install/index.php')){
 	$error_reporting =(Setting::get('debug') == 'Off')? '0':'-1';
 	error_reporting($error_reporting);
 }else{
-	error_reporting(0);
+	error_reporting(-1);
 }
