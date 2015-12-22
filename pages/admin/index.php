@@ -8,10 +8,18 @@ if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
 if(file_exists(path.'install/index.php')){
 	rename('pages/install.php', 'pages/install-disable.php');
 }
+if(Input::get('page') === "addCat"){
+	require 'addCat.php';
+	die();
+}
+if(Input::get('page') === "editCat"){
+	require 'editCat.php';
+	die();
+}
 ?>
 <html>
 	<head>
-		<?php require path.'assets/head.php';?>
+		<?php require 'inc/templates/head.php';?>
 		<?php if(Input::get('page') == 'cat'):?>
 		<style type="text/css">
 		a.white{
@@ -21,7 +29,7 @@ if(file_exists(path.'install/index.php')){
 		<?php endif;?>
 	</head>
 	<body>
-		<?php require path.'assets/nav.php';?>
+		<?php require 'inc/templates/nav.php';?>
 		<div class="container">
 			<?php if(Session::exists('complete')):?>
 			<div class="alert alert-success"><?php echo Session::flash('complete')?></div>
@@ -70,9 +78,9 @@ if(file_exists(path.'install/index.php')){
 			?>
 		</div>
 		</div>
-		<?php require path.'assets/foot.php';?>
+		<?php require 'inc/templates/foot.php';?>
 		<?php if(Input::get('page') == 'notification'):?>
-		<script type="text/javascript" src="../../../assets/js/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript">CKEDITOR.replace('message');</script>
 		<?php endif;?>
 	</body>

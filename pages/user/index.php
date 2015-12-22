@@ -1,6 +1,4 @@
 <?php
-define('path', '../../');
-include path.'inc/init.php';
 $user = new User();
 $db = DB::getInstance();
 if(!$user->isLoggedIn()){
@@ -11,10 +9,10 @@ if($_GET == null){}
 ?>
 <html>
 	<head>
-		<?php include path.'assets/head.php';?>
+		<?php include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include path.'assets/nav.php';?>
+		<?php include 'inc/templates/nav.php';?>
 		<div class="container">
 			<?php if(Session::exists('complete')){echo "<div class='alert alert-success'>".Session::flash('complete')."</div>";}?>
 			<?php if(Session::exists('error')){echo "<div class='alert alert-danger'>".Session::flash('error')."</div>";}?>
@@ -47,7 +45,7 @@ if($_GET == null){}
 				}?>
 			</div>
 		</div>
-		<?php include path.'assets/foot.php'?>
+		<?php include 'inc/templates/foot.php';?>
 		<?php if(Input::get('page') == "profile"):?>
 		<script type="text/javascript" src="../../assets/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript">

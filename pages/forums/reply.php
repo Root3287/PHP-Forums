@@ -4,10 +4,10 @@ $user = new User();
 
 if(Input::exists('get')){
 	if(!$forums->getPost(escape(Input::get('c')),escape(Input::get('p')))){
-		die();//Redirect::to(path.'404.php') // TODO MAKE 404
+		Redirect::to('/404'); // TODO MAKE 404
 	}
 }else{
-	die();//Redirect::to(path.'404.php'); //TODO: MAKE 404
+	Redirect::to('/404'); //TODO: MAKE 404
 }
 
 if(!$user->isLoggedIn()){
@@ -59,10 +59,10 @@ if(Input::exists()){
 ?>
 <html>
 	<head>
-	<?php Include 'assets/head.php';?>
+	<?php Include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include 'assets/nav.php';?>
+		<?php include 'inc/teamplates/nav.php';?>
 		<div class="container">
 		<div class="row">
 		<div class="col-md-9">
@@ -87,7 +87,7 @@ if(Input::exists()){
 		</div>
 		</div>
 		</div>
-		<?php include 'assets/foot.php';?>
+		<?php include 'inc/templates/foot.php';?>
 		<script type="text/javascript" src="/assets/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript">
 		$(CKEDITOR.replace('content'));

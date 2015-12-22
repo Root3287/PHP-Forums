@@ -38,7 +38,7 @@
           </ul>
           <?php }else{?>
           <ul class="dropdown-menu">
-            <li><a href="<?php echo path.'pages/user'?>">UserCP</a></li>
+            <li><a href="<?php echo '/user'?>">UserCP</a></li>
             <?php if($user->hasPermission("Mod")){?><li><a href="/mod">ModCP</a></li><?php }?>
             <?php if($user->hasPermission("Admin")){?><li><a href="/admin">AdminCP</a></li><?php }?>
             <li role="separator" class="divider"></li>

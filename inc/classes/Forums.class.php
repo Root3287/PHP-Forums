@@ -31,12 +31,12 @@ class Forums{
 				$author = $author->data();
 				echo "<tr>
 				<td>
-				<a href='/forums/view.php?c={$c}&p={$post->id}'>
+				<a href='/forums/?page=view&c={$c}&p={$post->id}'>
 				{$post->id}
 				</a>
 				</td>
 				<td>
-				<a href='/forums/view.php?c={$c}&p={$post->id}'>
+				<a href='/forums/?page=view&c={$c}&p={$post->id}'>
 				{$post->post_title}
 				</a>
 				</td>
@@ -80,7 +80,7 @@ class Forums{
 			foreach ($this->listParentCat() as $parent){
 				echo "<b>{$parent['name']}</b><br>";
 				foreach ($this->listChildCat($parent['id']) as $child){
-					echo "<a href='/forums/post/?cat={$child['id']}'>{$child['name']}</a><br/>";
+					echo "<a href='/forums/?page=post&cat={$child['id']}'>{$child['name']}</a><br/>";
 				}
 			}
 			echo '</div>';
@@ -88,7 +88,7 @@ class Forums{
 			foreach ($this->listParentCat() as $parent){
 				echo "<div class='panel panel-primary'><div class='panel-heading'>{$parent['name']}</div><div class='panel-body'>";
 				foreach ($this->listChildCat($parent['id']) as $child){
-					echo "<a href='/forums/post?cat={$child['id']}'>{$child['name']}</a><br/>";
+					echo "<a href='/forums/?page=post&cat={$child['id']}'>{$child['name']}</a><br/>";
 				}
 				echo "</div></div>";
 			}

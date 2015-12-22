@@ -59,10 +59,10 @@ if(Input::exists()){
 ?>
 <html>
 	<head>
-	<?php Include path.'assets/head.php';?>
+	<?php Include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include path.'assets/nav.php';?>
+		<?php include 'inc/templates/nav.php';?>
 		<div class="container">
 			<?php if(Input::exists()): if(Token::check(Input::get('token'))): if(!$val->passed()):?>
 				<div class="alert alert-danger"><?php foreach ($val->errors() as $error){echo $error.'<br/>';}?></div>
@@ -107,6 +107,6 @@ if(Input::exists()){
 				</form>
 			</div>
 		</div>
-		<?php include path.'assets/foot.php';?>
+		<?php include 'inc/templates/foot.php';?>
 	</body>
 </html>

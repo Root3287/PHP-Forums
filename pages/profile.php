@@ -10,10 +10,10 @@ if(!$user2->exists()){
 ?>
 <html>
 	<head>
-		<?php include path.'assets/head.php';?>
+		<?php include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include path.'assets/nav.php';?>
+		<?php include 'inc/templates/nav.php';?>
 		<div class="container">
 			<div class="row">
 				<div class="jumbotron">
@@ -47,6 +47,6 @@ if(!$user2->exists()){
 				</div>
 			</div>
 		</div>
-		<?php include path.'assets/foot.php'?>
+		<?php include 'inc/templates/foot.php';?>
 	</body>
 </html>

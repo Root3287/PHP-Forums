@@ -1,13 +1,25 @@
 <?php
 $forums = new Forums();
 $user = new User();
+if(Input::get('page') === "view"){
+	require 'view.php';
+	die();
+}
+if(Input::get('page') == "create"){
+	require 'create.php';
+	die();
+}
+if (Input::get('page') === "reply") {
+	require "reply.php";
+	die();
+}
 ?>
 <html>
 	<head>
-		<?php include 'assets/head.php';?>
+		<?php include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include 'assets/nav.php';?>
+		<?php include 'inc/templates/nav.php';?>
 		<div class="container">
 			<div class="col-md-9">
 				<?php 
@@ -33,6 +45,6 @@ $user = new User();
 				<?php $forums->listCat(true, path);?>
 			</div>
 		</div>
-		<?php include 'assets/foot.php'?>
+		<?php include 'inc/templates/foot.php';?>
 	</body>
 </html>

@@ -53,10 +53,10 @@ if(Input::exists()){
 ?>
 <html>
 	<head>
-	<?php Include path.'assets/head.php';?>
+	<?php Include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include path.'assets/nav.php';?>
+		<?php include 'inc/templates/nav.php';?>
 		<div class="container">
 		<div class="row">
 		<div class="col-md-9">
@@ -81,8 +81,8 @@ if(Input::exists()){
 		</div>
 		</div>
 		</div>
-		<?php include path.'assets/foot.php';?>
-		<script type="text/javascript" src="<?php echo path ?>assets/js/ckeditor/ckeditor.js"></script>
+		<?php include 'inc/templates/foot.php';?>
+		<script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript">
 			CKEDITOR.replace('content');
 		</script>

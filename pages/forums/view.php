@@ -12,10 +12,10 @@ $author = new User($post->post_user);
 ?>
 <html>
 	<head>
-		<?php include 'assets/head.php';?>
+		<?php include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include 'assets/nav.php';?>
+		<?php include 'inc/templates/nav.php';?>
 		<?php if(Session::exists('error')):?>
 			<div class="alert alert-danger"><?php echo Session::flash('error')?></div>
 		<?php endif;?>
@@ -92,6 +92,6 @@ $author = new User($post->post_user);
 			</div>
 		</div>
 		</div>
-		<?php include path.'assets/foot.php';?>
+		<?php include 'inc/templates/foot.php';?>
 	</body>
 </html>

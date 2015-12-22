@@ -13,18 +13,19 @@ $n = rand(0,count($quote)-1);
 ?>
 <html>
 	<head>
-		<?php include '../assets/head.php';?>
+		<?php include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include '../assets/nav.php';?>
+		<?php include 'inc/templates/nav.php';?>
 		<div class="container">
 			<div class="row">
 				<div class="jumbotron">
 					<h1>404</h1>
 					<h3><?php echo $quote[$n]?></h3>
+					<a onClick="window.history.back()" class="btn btn-md btn-default">Go Back</a><a href="/" class="btn btn-primary btn-md">Go Home</a>
 				</div>
 			</div>
 		</div>
-		<?php include '../assets/foot.php';?>
+		<?php include 'inc/templates/foot.php';?>
 	</body>
 </html>

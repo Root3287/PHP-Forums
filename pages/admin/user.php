@@ -1,5 +1,6 @@
 <?php 
 $f = null;
+$db = DB::getInstance();
 if(Input::exists()){
 	If(Token::check(Input::get('token'))){
 		$val= new Validation();

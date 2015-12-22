@@ -34,10 +34,10 @@ if(Input::exists()){
 ?>
 <html>
 	<head>
-		<?php require 'assets/head.php';?>
+		<?php require 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php require 'assets/nav.php';?>
+		<?php require 'inc/templates/nav.php';?>
 		<div class="container">
 		<form method="post" action="">
 			<div class="form-group">
@@ -57,6 +57,6 @@ if(Input::exists()){
 			</div>
 		</form>
 		</div>
-		<?php require 'assets/foot.php';?>
+		<?php require 'inc/templates/foot.php';?>
 	</body>
 </html>

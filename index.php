@@ -1,79 +1,17 @@
 <?php
-$uri =$_SERVER['REQUEST_URI'];
-$uri = explode('/', $uri);
+define('path', '');
 
-$project_folder_name = "forums"; // Define where the project is stored...
-$pages_folder_name = "pages/"; // Define where all the sub-pages are...
+require 'inc/init.php';
 
-foreach ($uri as $uri_key => $uri_value){
-	if($uri_value == $project_folder_name || $uri_value == ""){
-		$offset = $uri_key;
-	}
-}
-
-$limit = count($uri)-$offset;
-$exists = false;
-
-require_once 'inc/pages.php';
-
-// CHeck to see if page exists
-if($limit == 2){
-	if(in_array($uri[$offset+1], $pages)){	// Check first 'folder'
-		$exists = true;
-	}else{
-		if(array_key_exists($uri[$offset+1], $pages)){
-			$exists = true;
-			$key = true;
-		}
-	}
-}else if($limit>2){
-	if(in_array($uri[$offset+1], $pages)){	// Check first 'folder'
-		$exists = true;
-	}else{
-		if(array_key_exists($uri[$offset+1], $pages)){
-			$exists = true;
-			$key = true;
-		}
-	}
-	
-	if($exists == true || !empty($uri[$offset+2])){ // Check 'second' folder
-		if(in_array($uri[$offset+2], $pages[$uri[$offset+1]])){
-			$exists = true;
-			$key = true;
-		}else{
-			$exists = false;
-		}
-	}
-	
-	if(isset($uri[$offset+2][0]) && $uri[$offset+2][0] == "?"){ // get pram for GET
-		$exists = true;
-		$prams = true;
-	}
-}else{
-	if(!empty($uri[$offset+3])){
-		$prams = $uri[$offset+3];
-	}
-}
-
-// Render page
-require_once 'inc/init.php';
-
-if($limit == 2 || empty($uri[$offset+2])){
-	if(!isset($key)){
-		if(!empty($uri[$offset+1])){
-			require $pages_folder_name.$uri[$offset+1].'.php';
-		}else{
-			require $pages_folder_name.'index.php';
-		}
-	}
-}else{
-	if(!isset($key)){
-		require $pages_folder_name.$uri[$offset+1].'.php';
-	}else{
-		if(!isset($prams)){
-			require $pages_folder_name.$uri[$offset+1].'/'.$uri[$offset+2].'.php';
-		}else{
-			require $pages_folder_name.$uri[$offset+1].'/index.php';
-		}
-	}
-}
+$router = new Router();
+$router->add('/', function(){if(file_exists('pages/install.php')){ require 'pages/install.php';}else{require 'pages/index.php';}});
+$router->add('/admin(.*)', function(){require 'pages/admin/index.php';});
+$router->add('/forums(.*)', function(){require 'pages/forums/index.php';});
+$router->add('/mod(.*)', function(){require 'pages/mod/index.php';});
+$router->add('/user(.*)', function(){require 'pages/user/index.php';});
+$router->add('/login', function(){require 'pages/login.php';});
+$router->add('/logout', function(){require 'pages/logout.php';});
+$router->add('/profile', function(){require 'pages/profile.php';});
+$router->add('/register', function(){require 'pages/register.php';});
+$router->add('/404(.*)',function(){require 'pages/404.php';});
+$router->run();

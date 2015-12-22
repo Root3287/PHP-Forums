@@ -4,10 +4,10 @@ $forums = new Forums();
 ?>
 <html>
 	<head>
-		<?php include'assets/head.php';?>
+		<?php include'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include 'assets/nav.php';?>
+		<?php include 'inc/templates/nav.php';?>
 		<div class="container">
 			<?php
 				if(Session::exists('complete')){
@@ -33,6 +33,6 @@ $forums = new Forums();
 			?>
 			</div>
 		</div>
-		<?php include 'assets/foot.php';?>
+		<?php include 'inc/templates/foot.php';?>
 	</body>
 </html>
