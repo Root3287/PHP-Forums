@@ -5,7 +5,7 @@ if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
 	session::flash('error', 'You do not have access the admin page!');
 	Redirect::to('/');
 }
-if(file_exists(path.'install/index.php')){
+if(file_exists('pages/install')){
 	rename('pages/install.php', 'pages/install-disable.php');
 }
 if(Input::get('page') === "addCat"){
