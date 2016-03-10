@@ -23,31 +23,6 @@ class Forums{
 	public function getPost2($post){
 		return $this->_db->get('post', array('id','=',$post))->first();
 	}
-	public function listPost($c){
-		if($c){
-			echo "<table class='table table-striped table-hover'><thead><tr><th>ID #</th><th>Name</th><th>User</th></tr></thead><tbody>";
-			foreach($this->getPost($c) as $post){
-				$author = new User($post->post_user);
-				$author = $author->data();
-				echo "<tr>
-				<td>
-				<a href='/forums/?page=view&c={$c}&p={$post->id}'>
-				{$post->id}
-				</a>
-				</td>
-				<td>
-				<a href='/forums/?page=view&c={$c}&p={$post->id}'>
-				{$post->post_title}
-				</a>
-				</td>
-				<td>{$author->username}</td>
-				</tr>";
-			}
-			echo "</tbody></table>";
-		}else{
-			$this->listCat(false, $path);
-		}
-	}
 	public function listParentCat($group_id = null) {
 		$cats = $this->_db->query('SELECT * FROM cat WHERE parent IS NULL')->results();
 		$return = array();

@@ -1,12 +1,11 @@
 <?php
 $user= new User();
 $forums = new Forums();
-if(!Input::exists('get')){
+if(!$cat && !$post_id){
 	session::flash('error', 'There was no valid page! You have been taken back to the homepage!');
 	Redirect::to('/');
 }
-
-$post = $forums->getPost(Input::get('c'), Input::get('p'));
+$post = $forums->getPost($cat, $post_id);
 $post = $post[0];
 $author = new User($post->post_user);
 ?>
@@ -29,8 +28,12 @@ $author = new User($post->post_user);
 				<!-- USER FIRST POST -->
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-					<?php echo $post->post_title;?>
-					<div class="pull-right"><?php if($user->isLoggedIn()){?><a class="btn btn-xs btn-default" href="reply.php?c=<?php echo Input::get('c')?>&p=<?php echo Input::get('p');?>">Reply</a><?php }?></div>
+						<?php echo $post->post_title;?>
+						<div class="pull-right">
+							<?php if($user->isLoggedIn()){?>
+							<a class="btn btn-xs btn-default" href="/forums/reply/<?php echo $cat;?>/<?php echo $post_id;?>">Reply</a>
+							<?php }?>
+						</div>
 					</div>
 					<div class="panel-body">
 					<div class="row">
@@ -67,7 +70,7 @@ $author = new User($post->post_user);
 					<div class="panel panel-info">
 						<div class="panel-heading">
 						<?php echo $reply->title?>
-						<?php if($user->isLoggedIn()){?><a class="btn btn-xs btn-default" href="reply.php?c=<?php echo Input::get('c')?>&p=<?php echo Input::get('p');?>">Reply</a><?php }?>
+						<?php if($user->isLoggedIn()){?><a class="btn btn-xs btn-default" href="/forums/reply<?php echo $cat;?>/<?php echo $post_id;?>">Reply</a><?php }?>
 						</div>
 						<div class="panel-body">
 							<div class="row">
@@ -88,7 +91,13 @@ $author = new User($post->post_user);
 			</div>
 			<div class="col-md-3">
 				<h1>Other Categories</h1>
-				<?php $forums->listCat(true, path)?>
+				<?php foreach ($forums->listParentCat() as $parent){
+						echo "<div class='well'><b>{$parent['name']}</b><br>";
+						foreach ($forums->listChildCat($parent['id']) as $child){
+							echo "<a href='/forums/cat/{$child['id']}'>{$child['name']}</a><br/>";
+						}
+						echo "</div>";
+					}?>
 			</div>
 		</div>
 		</div>

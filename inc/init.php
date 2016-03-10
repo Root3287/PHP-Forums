@@ -1,20 +1,34 @@
 <?php
+$GLOBALS['config'] = array(
+		"config"=>array("name" => "Social-Media"),
+		"mysql" => array(
+		"host" => "127.0.0.1", //127.0.0.1.
+		"user" => "root", //root
+		"password" => "root", //password
+		"db" => "forums", //forums
+		"port" => "3306", //3306
+	),
+	"remember" => array(
+		"expiry" => 604800,
+	),
+	"session" => array (
+		"token_name" => "forums",
+		"cookie_name"=>"forums",
+		"session_name"=>"forums"
+	),
+);
 
 session_start();
 
-if(!file_exists('../install/index.php')){
+if(!file_exists('/pages/install/install.php')){
 	spl_autoload_register(function($class){
 		require 'inc/classes/'.$class.'.class.php';
-	});
-}else{
-	spl_autoload_register(function($class){
-		require '../inc/classes/'.$class.'.class.php';
 	});
 }
 
 require_once 'sanitize.php';
 
-if(!file_exists('../install/index.php')){
+if(!file_exists('/pages/install/install.php')){
 	$db = DB::getInstance();
 	if(Cookies::exists(Config::get('session/cookie_name')) && !Session::exists(Config::get('session/session_name'))){
 		$hash = Cookies::get(Config::get('session/cookie_name'));

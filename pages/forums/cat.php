@@ -1,21 +1,20 @@
 <?php
+$user =new User();
 $forums = new Forums();
-$user = new User();
-Redirect::to('/forums/cat/');
-die();
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<?php include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include 'inc/templates/nav.php';?>
+		<?php require 'inc/templates/nav.php';?>
 		<div class="container">
 			<div class="col-md-9">
 				<?php 
-				if(Input::exists('get')){
-					if(Input::get('cat') !=null){
-						echo "<h1>Posts</h1><a href=\"/forums/create/\">Create Post</a>";
+				if($cat){
+					if($cat !=null){
+						echo "<h1>Posts</h1><a href=\"/forums/create/$cat\">Create Post</a>";
 				?>
 				<table class='table table-striped table-hover'>
 					<thead>
@@ -26,7 +25,7 @@ die();
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach($forums->getPost(escape(Input::get('cat'))) as $post){
+						<?php foreach($forums->getPost(escape($cat)) as $post){
 							$author = new User($post->post_user);
 						?>
 						<tr>
@@ -48,26 +47,26 @@ die();
 					foreach ($forums->listParentCat() as $parent){
 						echo "<div class='panel panel-primary'><div class='panel-heading'>{$parent['name']}</div><div class='panel-body'>";
 						foreach ($forums->listChildCat($parent['id']) as $child){
-							echo "<a href='/forums/?cat={$child['id']}'>{$child['name']}</a><br/>";
+							echo "<a href='/forums/cat/{$child['id']}'>{$child['name']}</a><br/>";
 						}
 						echo "</div></div>";
 					}
 				}?>
 			</div>
 			<div class="col-md-3">
-				<?php if($user->isLoggedIn() && Input::exists('get') && Input::get('cat')){?><br/>
-				<a class="btn btn-default" href="create.php?c=<?php echo Input::get('cat')?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> New Post</a><br/>
+				<?php if($user->isLoggedIn() && Input::exists('get') && $cat){?><br/>
+				<a class="btn btn-default" href="create.php?c=<?php echo $cat?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> New Post</a><br/>
 				<?php }?>
 				<h1>Other Categories</h1>
 				<?php foreach ($forums->listParentCat() as $parent){
 						echo "<div class='panel panel-primary'><div class='panel-heading'>{$parent['name']}</div><div class='panel-body'>";
 						foreach ($forums->listChildCat($parent['id']) as $child){
-							echo "<a href='/forums/?cat={$child['id']}'>{$child['name']}</a><br/>";
+							echo "<a href='/forums/cat/{$child['id']}'>{$child['name']}</a><br/>";
 						}
 						echo "</div></div>";
 					}?>
 			</div>
 		</div>
-		<?php include 'inc/templates/foot.php';?>
+		<?php require 'inc/templates/foot.php';?>
 	</body>
 </html>

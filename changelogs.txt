@@ -10,3 +10,9 @@ Beta 0.2.0
 
 Beta 0.2.1
 - Fix bugs
+
+Beta 0.3.0
+- Fix everything
+- New file structure
+- New Install
+- Link path

@@ -1,0 +1,108 @@
+CREATE TABLE `cat` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`order` INT(11) NULL DEFAULT NULL,
+	`parent` INT(11) NULL DEFAULT NULL,
+	`news` INT(11) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `friends` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL DEFAULT '0',
+	`user_id2` INT(11) NOT NULL DEFAULT '0',
+	`accept` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `groups` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`group_name` TEXT NOT NULL,
+	`permissions` TEXT NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `notification` (
+	`id` BIGINT(255) NOT NULL AUTO_INCREMENT,
+	`user` INT(255) NOT NULL,
+	`message` MEDIUMTEXT NULL,
+	`read` INT(11) NULL DEFAULT '0',
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `post` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`post_title` VARCHAR(50) NOT NULL,
+	`cat_id` INT(11) NOT NULL DEFAULT '1',
+	`post_cont` LONGTEXT NOT NULL,
+	`post_user` INT(11) NOT NULL,
+	`post_date` DATE NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `reply` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`post_id` INT(11) NOT NULL,
+	`title` TEXT NOT NULL,
+	`content` LONGTEXT NOT NULL,
+	`user_id` INT(11) NOT NULL,
+	`date` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `settings` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` TEXT NOT NULL,
+	`value` TEXT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `users` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(50) NOT NULL,
+	`password` LONGTEXT NOT NULL,
+	`salt` LONGTEXT NOT NULL,
+	`name` VARCHAR(50) NOT NULL,
+	`email` TEXT NOT NULL,
+	`group` INT(11) NOT NULL,
+	`joined` DATETIME NOT NULL,
+	`private` INT(11) NULL DEFAULT '0',
+	`signature` MEDIUMTEXT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `user_session` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL,
+	`hash` LONGTEXT NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+
+INSERT INTO `settings` (`id`, `name`, `value`) VALUES (1, 'install', '1');
+INSERT INTO `settings` (`id`, `name`, `value`) VALUES (2, 'title', 'PHP-Foro');
+INSERT INTO `settings` (`id`, `name`, `value`) VALUES (3, 'bootstrap-theme', 'cosmo');
+INSERT INTO `settings` (`id`, `name`, `value`) VALUES (4, 'motd', '');
+INSERT INTO `settings` (`id`, `name`, `value`) VALUES (5, 'debug', 'On');
+INSERT INTO `groups` (`id`, `group_name`, `permissions`) VALUES (1, 'Register', '{"Post":1, "Admin":0,"Mod":0}');
+INSERT INTO `groups` (`id`, `group_name`, `permissions`) VALUES (2, 'Mod', '{"Post":1, "Admin":0,"Mod":1}');
+INSERT INTO `groups` (`id`, `group_name`, `permissions`) VALUES (3, 'Admin', '{"Post":1, "Admin":1,"Mod":1}');

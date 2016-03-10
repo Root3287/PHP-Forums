@@ -2,8 +2,8 @@
 $forums = new Forums();
 $user = new User();
 
-if(Input::exists('get')){
-	if(!$forums->getPost(escape(Input::get('c')),escape(Input::get('p')))){
+if($cat && $post_id){
+	if(!$forums->getPost(escape($cat),escape($post_id))){
 		Redirect::to('/404'); // TODO MAKE 404
 	}
 }else{
@@ -17,7 +17,7 @@ if(!$user->isLoggedIn()){
 
 $db = DB::getInstance();
 
-$q = $db->get('post', array('id', '=', escape(Input::get('p'))))->first();
+$q = $db->get('post', array('id', '=', escape($post_id)))->first();
 
 if(Input::exists()){
 	if(Input::get('Submit')){
@@ -35,14 +35,14 @@ if(Input::exists()){
 				try{
 					$forums->createReply(array(
 						'title' => escape(Input::get('title')),
-						'post_id' => escape(Input::get('p')),
+						'post_id' => escape($post_id),
 						'content' => Input::get('content'),
 						'date' => date('Y-m-d- H:i:s'),
 						'user_id' => $user->data()->id,
 					));
-					Notifaction::createMessage($user->data()->username.' posted a reply on your page', $forums->getPost2(Input::get('p'))->post_user);
+					Notifaction::createMessage($user->data()->username.' posted a reply on your page', $forums->getPost2($post_id)->post_user);
 					session::flash('complete', 'You posted your reply!');
-					Redirect::to('/forums/view.php?c='.Input::get('c').'&p='.Input::get('p'));
+					Redirect::to('/forums/view/'.$cat.'/'.$post_id);
 				}catch (Exception $e){
 					die($e->getMessage());
 				}
@@ -62,7 +62,7 @@ if(Input::exists()){
 	<?php Include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include 'inc/teamplates/nav.php';?>
+		<?php include 'inc/templates/nav.php';?>
 		<div class="container">
 		<div class="row">
 		<div class="col-md-9">

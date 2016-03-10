@@ -4,7 +4,7 @@ $forums = new Forums();
 ?>
 <html>
 	<head>
-		<?php include'inc/templates/head.php';?>
+		<?php include 'inc/templates/head.php';?>
 	</head>
 	<body>
 		<?php include 'inc/templates/nav.php';?>
@@ -29,7 +29,15 @@ $forums = new Forums();
 			</div>
 			<div class="col-md-9">
 			<?php 
-			if(!$forums->getCat()){echo '<div class="alert alert-info">There is no categoies at this time please contact an administrator!</div>';}else{$forums->listCat(false, '');}
+			if(!$forums->getCat()){echo '<div class="alert alert-info">There is no categoies at this time please contact an administrator!</div>';}else{
+					foreach ($forums->listParentCat() as $parent){
+						echo "<div class='panel panel-primary'><div class='panel-heading'>{$parent['name']}</div><div class='panel-body'>";
+						foreach ($forums->listChildCat($parent['id']) as $child){
+							echo "<a href='/forums/cat/{$child['id']}'>{$child['name']}</a><br/>";
+						}
+						echo "</div></div>";
+					}
+				}
 			?>
 			</div>
 		</div>

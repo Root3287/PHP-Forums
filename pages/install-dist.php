@@ -1,5 +1,4 @@
 <?php
-require '../inc/init.php';
 if(!Input::exists('get')){
 	$step = 'home';
 }else{
@@ -239,6 +238,6 @@ if(Input::exists()){
 		<?php
 		}?>
 		</div>
-		<?php include '../assets/foot.php';?>
+		<?php include 'inc/templates/foot.php';?>
 	</body>
 </html>

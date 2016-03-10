@@ -30,7 +30,7 @@ if(Input::exists()){
 	<?php include 'inc/templates/head.php';?>
 	</head>
 	<body>
-		<?php include 'assets/templates/nav.php';?>
+		<?php include 'inc/templates/nav.php';?>
 		<div class="container">
 			<?php if(Input::exists()): if(Token::check(Input::get('token'))): if(!$val->passed()):?>
 			<div class="alert alert-danger"><?php foreach ($val->errors() as $error){echo $error.'<br/>';}?></div>
