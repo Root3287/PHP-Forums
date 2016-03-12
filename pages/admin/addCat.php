@@ -1,8 +1,9 @@
 <?php
 $user = new User();
-if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
+$forums = new Forums();
+if(!$user->isAdmLoggedIn() && !$user->data()->group == 3){
 	Session::flash('error', 'You are not admin/logged in!');
-	Redirect::to('/');
+	Redirect::to('/admin');
 }
 
 if(Input::exists()){
@@ -39,23 +40,26 @@ if(Input::exists()){
 	<body>
 		<?php require 'inc/templates/nav.php';?>
 		<div class="container">
-		<form method="post" action="">
-			<div class="form-group">
-			<input class="form-control" name="title" type="text" placeholder="Title">
+			<div class="col-md-3"> <?php include 'pages/admin/nav.php'; ?></div>
+			<div class="col-md-9">
+				<form method="post" action="">
+					<div class="form-group">
+					<input class="form-control" name="title" type="text" placeholder="Title">
+					</div>
+					<div class="form-group">
+						 <select name="cat_par">
+						  <option selected="selected" value="NULL">Parent</option>
+						 <?php foreach ($forums->getCatParent() as $cat):?>
+						  	<option value="<?php echo $cat->id;?>"><?php echo $cat->name;?></option>
+						  <?php endforeach;?>
+						</select> 
+					</div>
+					<div class="form-group">
+						<input type="hidden" name="token" value="<?php echo Token::generate();?>">
+						<input class="btn btn-primary" type="submit" value="Add Cat">
+					</div>
+				</form>
 			</div>
-			<div class="form-group">
-				 <select name="cat_par">
-				  <option selected="selected" value="NULL">Parent</option>
-				  <?php foreach ($forums->getCatParent() as $cat):?>
-				  	<option value="<?php echo $cat->id;?>"><?php echo $cat->name;?></option>
-				  <?php endforeach;?>
-				</select> 
-			</div>
-			<div class="from-group">
-				<input type="hidden" name="token" value="<?php echo Token::generate();?>">
-				<input class="btn btn-primary" type="submit" value="Add Cat">
-			</div>
-		</form>
 		</div>
 		<?php require 'inc/templates/foot.php';?>
 	</body>

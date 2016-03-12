@@ -1,32 +1,15 @@
 <?php
 $user= new User();
-$forums = new Forums();
-if(!$user->isLoggedIn() && !$user->hasPermission('Admin')){
-	session::flash('error', 'You do not have access the admin page!');
-	Redirect::to('/');
+if(!$user->isAdmLoggedIn() || !$user->data()->group == 3){
+	Redirect::to('/admin/login');
 }
 if(file_exists('pages/install/install.php')){
 	rename('pages/install/install.php', 'pages/install/install-disable.php');
-}
-if(Input::get('page') === "addCat"){
-	require 'addCat.php';
-	die();
-}
-if(Input::get('page') === "editCat"){
-	require 'editCat.php';
-	die();
 }
 ?>
 <html>
 	<head>
 		<?php require 'inc/templates/head.php';?>
-		<?php if(Input::get('page') == 'cat'):?>
-		<style type="text/css">
-		a.white{
-			color: white;
-		}
-		</style>
-		<?php endif;?>
 	</head>
 	<body>
 		<?php require 'inc/templates/nav.php';?>
@@ -37,51 +20,15 @@ if(Input::get('page') === "editCat"){
 			<?php if(Session::exists('error')):?>
 			<div class="alert alert-danger"><?php echo Session::flash('error')?></div>
 			<?php endif;?>
-		<div class="col-md-3">
-		<div class="well">
-			<a href="?page">AdminCP Home</a><br/>
-			<a href="?page=settings">Setting</a><br/>
-			<a href="?page=cat">Manage Forums Group</a><br/>
-			<a href="?page=notification">Send Mass Notification</a><br/>
-			<a href="?page=groups">Manage Groups</a><br/>
-			<a href="?page=user">Manage Users</a><br/>
-			<a href="?page=error">Force an error</a>
-		</div>
-		</div>
-		<div class="col-md-9">
-			<?php 
-			switch (Input::get('page')){
-				default:
-					echo "<div class='jumbotron'><h1>AdminCP</h1></div>";
-					break;
-				case 'user':
-					include 'user.php';
-					break;
-				case 'settings':
-					include 'settings.php';
-					break;
-				case 'phpinfo':
-					break;
-				case 'cat':
-					include 'cat.php';
-					break;
-				case 'groups':
-					include 'group.php';
-					break;
-				case 'notification':
-					include 'notification.php';
-					break;
-			}
-			if(Input::get('page') == 'error'){
-				include 'error.php';
-			}
-			?>
-		</div>
+			<div class="col-md-3">
+				<?php include 'pages/admin/nav.php';?>
+			</div>
+			<div class="col-md-9">
+				<div class="jumbotron">
+					<h1>AdminCP</h1>
+				</div>
+			</div>
 		</div>
 		<?php require 'inc/templates/foot.php';?>
-		<?php if(Input::get('page') == 'notification'):?>
-		<script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
-		<script type="text/javascript">CKEDITOR.replace('message');</script>
-		<?php endif;?>
 	</body>
 </html>

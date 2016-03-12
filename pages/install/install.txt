@@ -97,6 +97,14 @@ CREATE TABLE `user_session` (
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB
 ;
+CREATE TABLE `adm_user_session` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL,
+	`hash` TEXT NOT NULL,
+	PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+;
 
 INSERT INTO `settings` (`id`, `name`, `value`) VALUES (1, 'install', '1');
 INSERT INTO `settings` (`id`, `name`, `value`) VALUES (2, 'title', 'PHP-Foro');

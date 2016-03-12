@@ -15,17 +15,28 @@ if(Input::exists()){
 	}
 }
 ?>
-<div class="row">
-	<h1>Send Mass Message</h1>
-</div>
-<div class="row">
-	<form action="?page=notification" method="post">
-	 	<div class="form-group">
-	 		<textarea class="form-control" rows="20" cols="20" name="message" id="message"></textarea><br/>
-	 	</div>
-	 	<input type="hidden" name="token" value="<?php echo Token::generate()?>">
-	 	<div class="form-group">
-	 		<input class="form-control btn btn-primary" type="submit" value="Submit">
-	 	</div>
-	</form>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<?php include 'inc/templates/head.php';?>
+	</head>
+	<body>
+		<div class="col-md-3"><?php include 'inc/templates/nav.php';?></div>
+		<div class="col-md-9">
+			<div class="row">
+				<h1>Send Mass Message</h1>
+			</div>
+			<div class="row">
+				<form action="?page=notification" method="post">
+				 	<div class="form-group">
+				 		<textarea class="form-control" rows="20" cols="20" name="message" id="message"></textarea><br/>
+				 	</div>
+				 	<input type="hidden" name="token" value="<?php echo Token::generate()?>">
+				 	<div class="form-group">
+				 		<input class="form-control btn btn-primary" type="submit" value="Submit">
+				 	</div>
+				</form>
+			</div>			
+		</div>
+	</body>
+</html>

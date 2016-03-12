@@ -5,6 +5,7 @@ Create AdminCP
 Create ModCP
 Finish validation errors on pages that requires validations.
 Survay?
+Redo Linking system
 
 AdminCP:
 Custom Pages
@@ -28,3 +29,7 @@ Avatar Uploads
 Address Information
 Achivement system?
 Notifcation system.
+
+Sticky Threads
+Announcement
+Rules
