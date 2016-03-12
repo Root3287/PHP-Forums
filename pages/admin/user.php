@@ -1,4 +1,8 @@
-<?php 
+<?php
+$user = new User();
+if(!$user->isAdmLoggedIn() || $user->data()->group == 3){
+	Redirect::to('/admin/login');
+}
 $f = null;
 $db = DB::getInstance();
 if(Input::exists()){

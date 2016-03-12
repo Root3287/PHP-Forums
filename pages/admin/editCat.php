@@ -39,6 +39,8 @@ if(Input::exists()){
 	<body>
 		<?php require 'inc/templates/nav.php';?>
 		<div class="container">
+			<div class="col-md-3"> <?php include 'pages/admin/nav.php'; ?> </div>
+			<div class="col-md-9">
 		<form method="post" action="">
 			<div class="form-group">
 			<input class="form-control" name="title" type="text" placeholder="Title" value="<?php echo $forums->getCat(Input::get('c'))[0]->name?>">
@@ -56,6 +58,7 @@ if(Input::exists()){
 				<input class="btn btn-primary" type="submit" value="Update">
 			</div>
 		</form>
+		</div>
 		</div>
 		<?php require 'inc/templates/foot.php';?>
 	</body>
