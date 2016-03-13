@@ -2,8 +2,8 @@ CREATE TABLE `cat` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`name` TEXT NOT NULL,
 	`description` TEXT NOT NULL,
-	`order` INT(11) NULL DEFAULT NULL,
-	`parent` INT(11) NULL DEFAULT NULL,
+	`Subcat` ENUM('true','false') NOT NULL DEFAULT 'false',
+	`parent` INT(11) NOT NULL,
 	`news` INT(11) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
 )
@@ -46,10 +46,13 @@ CREATE TABLE `post` (
 	`post_cont` LONGTEXT NOT NULL,
 	`post_user` INT(11) NOT NULL,
 	`post_date` DATE NOT NULL,
+	`reply` ENUM('true','false') NULL DEFAULT 'false',
+	`orignal_post` INT(11) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`)
 )
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB
+AUTO_INCREMENT=2
 ;
 CREATE TABLE `reply` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -101,6 +104,14 @@ CREATE TABLE `adm_user_session` (
 	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`user_id` INT(11) NOT NULL,
 	`hash` TEXT NOT NULL,
+	PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+;
+CREATE TABLE `forums_settings` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`cat_id` INT(10) UNSIGNED NOT NULL,
+	`settings` LONGTEXT NOT NULL,
 	PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB

@@ -44,10 +44,10 @@ $forums = new Forums();
 				 	}
 				}else{
 					echo "<h1>Categories</h1>";
-					foreach ($forums->listParentCat() as $parent){
-						echo "<div class='panel panel-primary'><div class='panel-heading'>{$parent['name']}</div><div class='panel-body'>";
-						foreach ($forums->listChildCat($parent['id']) as $child){
-							echo "<a href='/forums/cat/{$child['id']}'>{$child['name']}</a><br/>";
+					foreach ($forums->getForums() as $forums){
+						echo "<div class='panel panel-primary'><div class='panel-heading'>{$forums['name']}</div><div class='panel-body'>";
+						foreach ($forums->getSubforums($forums['id']) as $subforums){
+							echo "<a href='/forums/cat/{$subforums['id']}'>{$subforms['name']}</a><br/>";
 						}
 						echo "</div></div>";
 					}
@@ -58,10 +58,10 @@ $forums = new Forums();
 				<a class="btn btn-default" href="create.php?c=<?php echo $cat?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> New Post</a><br/>
 				<?php }?>
 				<h1>Other Categories</h1>
-				<?php foreach ($forums->listParentCat() as $parent){
-						echo "<div class='panel panel-primary'><div class='panel-heading'>{$parent['name']}</div><div class='panel-body'>";
-						foreach ($forums->listChildCat($parent['id']) as $child){
-							echo "<a href='/forums/cat/{$child['id']}'>{$child['name']}</a><br/>";
+				<?php foreach ($forums->getForums() as $forums){
+						echo "<div class='panel panel-primary'><div class='panel-heading'>{$forums['name']}</div><div class='panel-body'>";
+						foreach ($forums->getSubforums($forums['id']) as $subforums){
+							echo "<a href='/forums/cat/{$subforums['id']}'>{$subforms['name']}</a><br/>";
 						}
 						echo "</div></div>";
 					}?>
