@@ -108,8 +108,6 @@ CREATE TABLE `adm_user_session` (
 )
 ENGINE=InnoDB
 ;
-<<<<<<< HEAD
-=======
 CREATE TABLE `forums_settings` (
 	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`cat_id` INT(10) UNSIGNED NOT NULL,
@@ -118,7 +116,6 @@ CREATE TABLE `forums_settings` (
 )
 ENGINE=InnoDB
 ;
->>>>>>> master
 
 INSERT INTO `settings` (`id`, `name`, `value`) VALUES (1, 'install', '1');
 INSERT INTO `settings` (`id`, `name`, `value`) VALUES (2, 'title', 'PHP-Foro');
