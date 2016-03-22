@@ -10,6 +10,13 @@ $forums = new Forums();
 	<body>
 		<?php require 'inc/templates/nav.php';?>
 		<div class="container">
+		<?php if(Session::exists('error')):?>
+			<div class="alert alert-danger"><?php echo Session::flash('error')?></div>
+		<?php endif;?>
+		<?php if(Session::exists('complete')):?>
+			<div class="alert alert-success"><?php echo Session::flash('complete')?></div>
+		<?php endif;?>
+
 			<div class="col-md-9">
 				<?php 
 				if($cat){
@@ -26,14 +33,18 @@ $forums = new Forums();
 					</thead>
 					<tbody>
 						<?php foreach($forums->getPost(escape($cat)) as $post){
+							if($post->reply =="false"){
 							$author = new User($post->post_user);
 						?>
+						
 						<tr>
-							<td><?php echo $post->id?></td>
-							<td><?php echo $post->post_title?></td>
+							<td><a href="/forums/view/<?php echo $post->cat_id;?>/<?php echo $post->id;?>"><?php echo $post->id?></a></td>
+							<td><a href="/forums/view/<?php echo $post->cat_id;?>/<?php echo $post->id;?>"><?php echo $post->post_title?></a></td>
 							<td><?php echo $author->data()->username?></td>
+							</a>
 						</tr>
 						<?php
+						}
 						}
 						?>
 					</tbody>
@@ -44,13 +55,16 @@ $forums = new Forums();
 				 	}
 				}else{
 					echo "<h1>Categories</h1>";
-					foreach ($forums->getForums() as $forums){
-						echo "<div class='panel panel-primary'><div class='panel-heading'>{$forums['name']}</div><div class='panel-body'>";
-						foreach ($forums->getSubforums($forums['id']) as $subforums){
-							echo "<a href='/forums/cat/{$subforums['id']}'>{$subforms['name']}</a><br/>";
+					foreach ($forums->getForums() as $parent){
+						if($parent->Subcat == "false"){
+							echo "<div class='panel panel-primary'><div class='panel-heading'>{$parent->name}</div><div class='panel-body'>";
+							foreach ($forums->getSubforums($parent->id) as $child){
+								echo "<a href='/forums/cat/{$child->id}'>{$child->name}</a><br/>";
+							}
+							echo "</div></div>";
 						}
-						echo "</div></div>";
 					}
+
 				}?>
 			</div>
 			<div class="col-md-3">
@@ -58,13 +72,16 @@ $forums = new Forums();
 				<a class="btn btn-default" href="create.php?c=<?php echo $cat?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> New Post</a><br/>
 				<?php }?>
 				<h1>Other Categories</h1>
-				<?php foreach ($forums->getForums() as $forums){
-						echo "<div class='panel panel-primary'><div class='panel-heading'>{$forums['name']}</div><div class='panel-body'>";
-						foreach ($forums->getSubforums($forums['id']) as $subforums){
-							echo "<a href='/forums/cat/{$subforums['id']}'>{$subforms['name']}</a><br/>";
+				<?php foreach ($forums->getForums() as $parent){
+						if($parent->Subcat == "false"){
+							echo "<div class='well'><strong>{$parent->name}</strong><br>";
+							foreach ($forums->getSubforums($parent->id) as $child){
+								echo "<a href='/forums/cat/{$child->id}'>{$child->name}</a><br/>";
+							}
+							echo "";
 						}
-						echo "</div></div>";
-					}?>
+					}
+?>
 			</div>
 		</div>
 		<?php require 'inc/templates/foot.php';?>

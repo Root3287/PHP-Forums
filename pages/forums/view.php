@@ -6,7 +6,12 @@ if(!$cat && !$post_id){
 	Redirect::to('/');
 }
 $post = $forums->getPost($cat, $post_id);
-$post = $post[0];
+$post=$post[0];
+
+if(!$post->reply == "false"){ //If the post is a replied message 
+	Redirect::to("/forums/view/$cat/$post->orignal_post");
+}
+
 $author = new User($post->post_user);
 ?>
 <html>
@@ -24,7 +29,7 @@ $author = new User($post->post_user);
 		<div class="container">
 		<div class="row">
 			<div class="col-md-9">
-				<h1><?php echo  $post->post_title; ?></h1>
+				<h1><?php echo $post->post_title; ?></h1>
 				<!-- USER FIRST POST -->
 				<div class="panel panel-primary">
 					<div class="panel-heading">
@@ -66,16 +71,16 @@ $author = new User($post->post_user);
 					</div>
 				</div>
 				<!-- REPLY -->
-				<?php foreach ($forums->getReply(escape(Input::get('p'))) as $reply){ $author_reply = new User($reply->user_id);?>
+				<?php foreach ($forums->getReply(escape($post_id)) as $reply){ $author_reply = new User($reply->post_user);?>
 					<div class="panel panel-info">
 						<div class="panel-heading">
-						<?php echo $reply->title?>
+						<?php echo $reply->post_title?>
 						<?php if($user->isLoggedIn()){?><a class="btn btn-xs btn-default" href="/forums/reply<?php echo $cat;?>/<?php echo $post_id;?>">Reply</a><?php }?>
 						</div>
 						<div class="panel-body">
 							<div class="row">
 							<div class="col-md-3"><?php echo "<img src='{$author_reply->getAvatarURL(64)}' class='img-circle'><br/>".$author_reply->data()->username;?></div>
-							<div class="col-md-9"><?php echo $reply->content?></div>
+							<div class="col-md-9"><?php echo $reply->post_cont;?></div>
 							</div>
 							<div class="row">
 								<hr>

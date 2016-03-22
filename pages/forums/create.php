@@ -1,7 +1,7 @@
 <?php
 $forums = new Forums();
 $user = new User();
-if(!$forums->getCat(escape($cat))){
+if(!$forums->getForums(escape($cat))){
 	Redirect::to('/404'); // TODO MAKE 404
 }
 
@@ -33,9 +33,8 @@ if(Input::exists()){
 					));
 					$db= DB::getInstance();
 					$post = $db->get('post',array('1','=','1'))->count();
-					$post = $post;
 					session::flash('complete', 'You posted your post!');
-					Redirect::to("/forums/view/".escape($cat)."/".$post);		
+					Redirect::to("/forums/cat/".escape($cat));		
 				}catch (Exception $e){
 					die($e->getMessage());
 				}
@@ -72,12 +71,14 @@ if(Input::exists()){
 		</div>
 		<div class="col-md-3">
 			<h1>Other Categories</h1>
-			<?php foreach ($forums->listParentCat() as $parent){
-						echo "<div class='well'><b>{$parent['name']}</b><br>";
-						foreach ($forums->listChildCat($parent['id']) as $child){
-							echo "<a href='/forums/cat/{$child['id']}'>{$child['name']}</a><br/>";
+			<?php foreach ($forums->getForums() as $parent){
+						if($parent->Subcat == "false"){
+							echo "<div class='well'><strong>{$parent->name}</strong><br>";
+							foreach ($forums->getSubforums($parent->id) as $child){
+								echo "<a href='/forums/cat/{$child->id}'>{$child->name}</a><br/>";
+							}
+							echo "";
 						}
-						echo "</div>";
 					}?>
 		</div>
 		</div>
